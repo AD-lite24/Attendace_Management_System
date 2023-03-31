@@ -1,17 +1,18 @@
 from tkinter import *
 import mysql.connector
 from mysql.connector import Error
+from interface import InterfaceWindow
 
 class MainWindow():
     
     def __init__(self) -> None:
-        root = Tk()
-        root.geometry('500x300')
+        self.root = Tk()
+        self.root.geometry('500x300')
 
-        Label(root, text='Login', font='ar 15 bold').grid(row = 0, column=3)
+        Label(self.root, text='Login', font='ar 15 bold').grid(row = 0, column=3)
         
-        username = Label(root, text='Username')
-        password = Label(root, text='Password')
+        username = Label(self.root, text='Username')
+        password = Label(self.root, text='Password')
 
         username.grid(row = 1, column= 2)
         password.grid(row = 2, column= 2)
@@ -19,8 +20,8 @@ class MainWindow():
         username_value = StringVar()
         password_value = StringVar()
 
-        self.user_entry = Entry(root, width=25, textvariable=username_value)
-        self.pass_entry = Entry(root, width=25, textvariable=password_value, show="*")
+        self.user_entry = Entry(self.root, width=25, textvariable=username_value)
+        self.pass_entry = Entry(self.root, width=25, textvariable=password_value, show="*")
 
         self.user_entry.grid(row=1, column=3)
         self.pass_entry.grid(row=2, column=3)
@@ -31,7 +32,7 @@ class MainWindow():
         #For quick connection remove later!!
         self.connect('root', '24112003')
         
-        root.mainloop()
+        self.root.mainloop()
 
     def login(self):
         
@@ -53,6 +54,7 @@ class MainWindow():
             else:
                 print('Login Succesful!')
                 self.connect(self.user_entry.get(), self.pass_entry.get())
+                new = InterfaceWindow(self.root)
 
 
     def forgot_pass(self):
@@ -68,7 +70,7 @@ class MainWindow():
             if connection.is_connected():
 
                 mycursor = connection.cursor()
-                mycursor.execute('CREATE DATABASE university;')
+                mycursor.execute('CREATE DATABASE IF NOT EXISTS university;')
                 mycursor.execute('USE university;')
                 db_Info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_Info)
