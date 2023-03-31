@@ -26,15 +26,15 @@ class MainWindow():
         self.user_entry.grid(row=1, column=3)
         self.pass_entry.grid(row=2, column=3)
 
-        Button(text = 'Login', command = self.login).grid(row = 4, column = 2)
-        Button(text = 'Forgot Password', command = self.forgot_pass).grid(row = 4, column = 3)
+        Button(text = 'Login', command = self.__login).grid(row = 4, column = 2)
+        Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 4, column = 3)
 
         #For quick connection remove later!!
-        self.connect('root', '24112003')
+        self.__connect('root', '24112003')
         
         self.root.mainloop()
 
-    def login(self):
+    def __login(self):
         
         def delete_text():
             self.user_entry.delete(0, 100)
@@ -53,15 +53,15 @@ class MainWindow():
                 
             else:
                 print('Login Succesful!')
-                connection = self.connect(self.user_entry.get(), self.pass_entry.get())
+                connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
                 new = InterfaceWindow(self.root, connection)
 
 
-    def forgot_pass(self):
+    def __forgot_pass(self):
         pass
     
 
-    def connect(self, user, pwd):
+    def __connect(self, user, pwd):
         try:
             connection = mysql.connector.connect(host='localhost',
                                                  user=user,
