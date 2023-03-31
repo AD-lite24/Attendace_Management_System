@@ -53,8 +53,8 @@ class MainWindow():
                 
             else:
                 print('Login Succesful!')
-                self.connect(self.user_entry.get(), self.pass_entry.get())
-                new = InterfaceWindow(self.root)
+                connection = self.connect(self.user_entry.get(), self.pass_entry.get())
+                new = InterfaceWindow(self.root, connection)
 
 
     def forgot_pass(self):
@@ -78,6 +78,7 @@ class MainWindow():
                 cursor.execute("select database();")
                 record = cursor.fetchone()
                 print("You're connected to database: ", record)
+                return connection
 
         except Error as e:
             print('Error while connecting to mysql', e)
