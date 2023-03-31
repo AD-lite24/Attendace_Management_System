@@ -1,4 +1,6 @@
 from tkinter import *
+import mysql.connector
+from mysql.connector import Error
 
 class MainWindow():
     
@@ -24,7 +26,10 @@ class MainWindow():
         self.pass_entry.grid(row=2, column=3)
 
         Button(text = 'Login', command = self.login).grid(row = 4, column = 2)
-        Button(text = 'Forgot Password', command = self.forgot_pass()).grid(row = 4, column = 3)
+        Button(text = 'Forgot Password', command = self.forgot_pass).grid(row = 4, column = 3)
+
+        #For quick connection remove later!!
+        self.connect('root', '24112003')
         
         root.mainloop()
 
@@ -34,8 +39,8 @@ class MainWindow():
             self.user_entry.delete(0, 100)
             self.pass_entry.delete(0, 100)
         
-        correct_user = 'admin'
-        correct_pass = '1234'
+        correct_user = 'root'
+        correct_pass = '24112003'
         if self.user_entry.get() != correct_user:
             print("Wrong Username!")
             delete_text()
@@ -47,10 +52,33 @@ class MainWindow():
                 
             else:
                 print('Login Succesful!')
+                self.connect(self.user_entry.get(), self.pass_entry.get())
 
 
     def forgot_pass(self):
         pass
+    
+
+    def connect(self, user, pwd):
+        try:
+            connection = mysql.connector.connect(host='localhost',
+                                                 user=user,
+                                                 password=pwd)
+
+            if connection.is_connected():
+
+                mycursor = connection.cursor()
+                mycursor.execute('CREATE DATABASE university;')
+                mycursor.execute('USE university;')
+                db_Info = connection.get_server_info()
+                print("Connected to MySQL Server version ", db_Info)
+                cursor = connection.cursor()
+                cursor.execute("select database();")
+                record = cursor.fetchone()
+                print("You're connected to database: ", record)
+
+        except Error as e:
+            print('Error while connecting to mysql', e)
 
     
 
