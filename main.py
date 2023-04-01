@@ -10,10 +10,10 @@ class MainWindow():
         self.root = Tk()
         self.root.geometry('500x300')
 
-        Label(self.root, text='Login', font='ar 15 bold').grid(row = 0, column=3)
+        Label(self.root, text='Login', font='ar 15 bold', foreground='blue').grid(row = 0, column=3)
         
-        username = Label(self.root, text='Username')
-        password = Label(self.root, text='Password')
+        username = Label(self.root, text='Username', foreground='green')
+        password = Label(self.root, text='Password', foreground='green')
 
         username.grid(row = 1, column= 2)
         password.grid(row = 2, column= 2)
