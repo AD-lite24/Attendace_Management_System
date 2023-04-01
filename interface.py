@@ -14,10 +14,11 @@ class InterfaceWindow(Toplevel):
 
         Label(self, text='Welcome', font='ar 15 bold').grid(row = 0, column=5)
 
-        admin = UniversityAdmin(self.connection)
+        admin = UniversityAdmin(self.connection, self.master)
 
         Button(self, text='Add Student', command=admin.add_student).grid(row=2, column=5)
         Button(self, text = 'Remove Student', command = admin.remove_student).grid(row = 4, column = 5)
+
 
 
 

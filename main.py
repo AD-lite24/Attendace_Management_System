@@ -1,4 +1,5 @@
 from tkinter import *
+import utils
 import mysql.connector
 from mysql.connector import Error
 from interface import InterfaceWindow
@@ -35,6 +36,10 @@ class MainWindow():
         self.root.mainloop()
 
     def __login(self):
+
+        #AUTO LOGIN FOR TESTING REMOVE LATER
+        connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
+        new = InterfaceWindow(self.root, connection)
         
         def delete_text():
             self.user_entry.delete(0, 100)
@@ -54,6 +59,7 @@ class MainWindow():
             else:
                 print('Login Succesful!')
                 connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
+                utils.init_schema(connection=connection)
                 new = InterfaceWindow(self.root, connection)
 
 
@@ -70,8 +76,8 @@ class MainWindow():
             if connection.is_connected():
 
                 mycursor = connection.cursor()
-                mycursor.execute('CREATE DATABASE IF NOT EXISTS university;')
-                mycursor.execute('USE university;')
+                mycursor.execute('CREATE DATABASE IF NOT EXISTS university_a;')
+                mycursor.execute('USE university_a;')
                 db_Info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_Info)
                 cursor = connection.cursor()
@@ -86,7 +92,6 @@ class MainWindow():
     
 
 if __name__ == '__main__':
-
 
     print('Starting')
     window = MainWindow()
