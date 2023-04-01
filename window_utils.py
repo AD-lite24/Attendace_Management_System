@@ -1,6 +1,6 @@
 from tkinter import *
 
-def populate_add_student(new_win):
+def populate_add_student_gui(new_win):
 
     stu_name = Label(new_win, text='Name:', foreground='green')
     stu_name.grid(row=0, column=0, pady=5)
@@ -30,3 +30,9 @@ def populate_add_student(new_win):
 
 #Add other gui functions here
 #*******************************************#
+
+def populate_remove_student_gui():
+    pass
+
+def populate_student_info_gui():
+    pass

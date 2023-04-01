@@ -15,8 +15,8 @@ class UniversityAdmin():
         new_win.title('Add Student')
         new_win.geometry(self.master.geometry())
 
-        ID, name, dept, DOB = window_utils.populate_add_student(new_win=new_win)
-        utils.add_student(ID, name, dept, DOB)
+        ID, name, dept, DOB = window_utils.populate_add_student_gui(new_win=new_win)
+        utils.add_student_query(ID, name, dept, DOB)
 
     def remove_student():
         pass
@@ -27,7 +27,7 @@ class UniversityAdmin():
     #Add other operations here
     #************************************************#
 
-    
+    #Other trends that need to be shown
     
     
     
