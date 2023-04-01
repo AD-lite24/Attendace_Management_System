@@ -20,6 +20,14 @@ class UniversityAdmin():
 
     def remove_student():
         pass
+
+    def show_student_info():
+        pass
+
+    #Add other operations here
+    #************************************************#
+
+    
     
     
     

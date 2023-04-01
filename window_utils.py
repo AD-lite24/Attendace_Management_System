@@ -27,3 +27,6 @@ def populate_add_student(new_win):
     e_DOB.grid(row=3, column=1, pady=5)
 
     return e_ID.get(), e_name.get(), e_dept.get(), e_DOB.get()
+
+#Add other gui functions here
+#*******************************************#

@@ -63,6 +63,11 @@ def init_schema(connection):
     #     """
     # )
 
-def add_student(ID, name, dept, DOB):
-
+def add_student_query(ID, name, dept, DOB):
     pass
+
+def remove_student_query(ID):
+    pass
+
+#Add other utility queries here
+#***************************************#
