@@ -63,4 +63,6 @@ def init_schema(connection):
     #     """
     # )
 
+def add_student(ID, name, dept, DOB):
 
+    pass

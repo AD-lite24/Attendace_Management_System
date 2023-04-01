@@ -18,11 +18,9 @@ class MainWindow():
         username.grid(row = 1, column= 2)
         password.grid(row = 2, column= 2)
 
-        username_value = StringVar()
-        password_value = StringVar()
 
-        self.user_entry = Entry(self.root, width=25, textvariable=username_value)
-        self.pass_entry = Entry(self.root, width=25, textvariable=password_value, show="*")
+        self.user_entry = Entry(self.root, width=25)
+        self.pass_entry = Entry(self.root, width=25, show="*")
 
         self.user_entry.grid(row=1, column=3)
         self.pass_entry.grid(row=2, column=3)
@@ -68,6 +66,7 @@ class MainWindow():
     
 
     def __connect(self, user, pwd):
+
         try:
             connection = mysql.connector.connect(host='localhost',
                                                  user=user,
