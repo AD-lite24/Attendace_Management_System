@@ -10,23 +10,23 @@ class MainWindow():
         self.root = Tk()
         self.root.geometry('500x300')
 
-        Label(self.root, text='Login', font='ar 15 bold', foreground='blue').grid(row = 0, column=3)
+        Label(self.root, text='Login', font='ar 15 bold', foreground='blue').grid(row = 0, column=0)
         
         username = Label(self.root, text='Username', foreground='green')
         password = Label(self.root, text='Password', foreground='green')
 
-        username.grid(row = 1, column= 2)
-        password.grid(row = 2, column= 2)
+        username.grid(row = 1, column= 0, pady=15)
+        password.grid(row = 2, column= 0, pady=15)
 
 
         self.user_entry = Entry(self.root, width=25)
         self.pass_entry = Entry(self.root, width=25, show="*")
 
-        self.user_entry.grid(row=1, column=3)
-        self.pass_entry.grid(row=2, column=3)
+        self.user_entry.grid(row=1, column=1, padx=5, pady=15)
+        self.pass_entry.grid(row=2, column=1, padx=5, pady=15)
 
-        Button(text = 'Login', command = self.__login).grid(row = 4, column = 2)
-        Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 4, column = 3)
+        Button(text = 'Login', command = self.__login).grid(row = 3, column = 0, pady=15)
+        Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 3, column = 1, pady=15)
 
         #For quick connection remove later!!
         self.__connect('root', '24112003')
