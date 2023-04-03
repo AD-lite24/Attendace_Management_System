@@ -120,6 +120,7 @@ def info_student_query(connection, ID):
     print('Name: ', out[1], ' ', out[2])
     print('DOB: ', out[3])
     print('Department: ', out[4])
+    
     connection.commit()
     mycursor.close()
 
