@@ -37,7 +37,7 @@ class MainWindow():
 
         #AUTO LOGIN FOR TESTING REMOVE LATER
         connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
-        new = InterfaceWindow(self.root, connection)
+        InterfaceWindow(self.root, connection)
         
         def delete_text():
             self.user_entry.delete(0, 100)
@@ -58,7 +58,8 @@ class MainWindow():
                 print('Login Succesful!')
                 connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
                 utils.init_schema(connection=connection)
-                new = InterfaceWindow(self.root, connection)
+                utils.add_student_query(connection, '1111', 'aaaa', 'dddd', 'CSIS', '2003-10-10')
+                new = InterfaceWindow(master=self.root, connection=connection)
 
 
     def __forgot_pass(self):
@@ -83,6 +84,8 @@ class MainWindow():
                 cursor.execute("select database();")
                 record = cursor.fetchone()
                 print("You're connected to database: ", record)
+                connection.commit()
+                mycursor.close()
                 return connection
 
         except Error as e:
