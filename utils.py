@@ -136,5 +136,11 @@ def info_student_query(connection, ID):
     connection.commit()
     mycursor.close()
 
+def register_course_student(connection, stu_ID, course_ID):
+
+    mycursor = connection.cursor()
+
+    
+
     #Add other utility queries here
     #***************************************#

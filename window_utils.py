@@ -85,6 +85,7 @@ def populate_student_info_gui(new_win):
     return ID.get()
     
 def populate_register_student_gui(new_win):
+    
     Student_id = StringVar()
     Course_id = StringVar()
     
