@@ -29,7 +29,7 @@ class MainWindow():
         Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 3, column = 1, pady=15)
 
         #For quick connection remove later!!
-        self.__connect('root', '24112003')
+        self.__connect('root', '21012003')
         
         self.root.mainloop()
 
