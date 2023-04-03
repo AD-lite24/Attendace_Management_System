@@ -67,5 +67,19 @@ def populate_remove_student_gui(new_win):
 
     return ID.get()
 
-def populate_student_info_gui():
-    pass
+def populate_student_info_gui(new_win):
+    
+    ID = StringVar()
+
+    stu_id = Label(new_win, text='ID:', foreground='green')
+    stu_id.pack()
+
+    e_id = Entry(new_win, width=25, textvariable=ID)
+    e_id.pack()
+
+    Button(master=new_win, text='Submit', command=new_win.destroy).pack()
+
+    new_win.grab_set()
+    new_win.wait_window()
+
+    return ID.get()

@@ -99,9 +99,27 @@ def remove_student_query(connection, ID):
     query = f"""DELETE FROM students
             WHERE Student_id = '{ID}';
             """
-    print(query)
-    
+
     mycursor.execute(query)
+    connection.commit()
+    mycursor.close()
+
+def info_student_query(connection, ID):
+
+    mycursor = connection.cursor()
+
+    query = f"""SELECT * FROM students
+            WHERE Student_id = '{ID}';
+            """
+
+    mycursor.execute(query)
+    out = mycursor.fetchall()
+    out = out[0]
+
+    print('ID: ', out[0])
+    print('Name: ', out[1], ' ', out[2])
+    print('DOB: ', out[3])
+    print('Department: ', out[4])
     connection.commit()
     mycursor.close()
 
