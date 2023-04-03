@@ -51,22 +51,39 @@ def populate_add_student_gui(new_win):
 #*******************************************#
 
 def populate_remove_student_gui(new_win):
+
+    ID = StringVar()
     
     stu_id = Label(new_win, text='ID:', foreground='green')
-    stu_id.grid(row = 0, column=0, pady = 5)
+    stu_id.pack()
 
-    e_id = Entry(new_win, width=25)
-    e_id.grid(row = 0, column = 1, pady = 5)
-    #e_id.pack()
-    
-    Button(master=new_win, text='Remove', command=new_win.destroy).grid(row = 1, column=1, pady=5)
+    e_id = Entry(new_win, width=25, textvariable=ID)
+    e_id.pack()
+
+    Button(master=new_win, text='Submit', command=new_win.destroy).pack()
+
     new_win.grab_set()
     new_win.wait_window()
-    
-    return e_id.get()
 
-def populate_student_info_gui():
-    pass
+    return ID.get()
+
+def populate_student_info_gui(new_win):
+    
+    ID = StringVar()
+
+    stu_id = Label(new_win, text='ID:', foreground='green')
+    stu_id.pack()
+
+    e_id = Entry(new_win, width=25, textvariable=ID)
+    e_id.pack()
+
+    Button(master=new_win, text='Submit', command=new_win.destroy).pack()
+
+    new_win.grab_set()
+    new_win.wait_window()
+
+    return ID.get()
+    
 def populate_register_student_gui(new_win):
     Student_id = StringVar()
     Course_id = StringVar()
@@ -89,3 +106,5 @@ def populate_register_student_gui(new_win):
     
     return Student_id.get(), Course_id.get()
     
+
+

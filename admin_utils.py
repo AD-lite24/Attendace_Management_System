@@ -8,6 +8,7 @@ class UniversityAdmin():
     def __init__(self, connection, master) -> None:
         self.connection = connection
         self.master = master
+        self.mycursor = self.connection.cursor()
 
     def add_student(self):
         
@@ -18,27 +19,25 @@ class UniversityAdmin():
         ID, first_name, last_name, dept, DOB = window_utils.populate_add_student_gui(new_win=new_win)
         utils.add_student_query(self.connection, ID, first_name, last_name, dept, DOB)
 
+
     def remove_student(self):
         
         new_win = Toplevel(master=self.master)
         new_win.title('Remove Student')
         new_win.geometry(self.master.geometry())
 
-        ID = window_utils.populate_remove_student_gui(new_win = new_win)
+        ID = window_utils.populate_remove_student_gui(new_win=new_win)
         utils.remove_student_query(self.connection, ID)
 
-    def show_student_info():
-        pass
-    
-    def register_student(self):
+    def show_student_info(self):
         
-        new_win = Toplevel(master = self.master)
-        new_win.title('Register Student in Course')
+        new_win = Toplevel(master=self.master)
+        new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-        
-        student_id, course_id = window_utils.populate_register_student_gui(new_win = new_win)
-        utils.register_student_query(self.connection, student_id, course_id)
-        #pass
+
+        ID = window_utils.populate_student_info_gui(new_win=new_win)
+        utils.info_student_query(self.connection, ID)
+
 
     #Add other operations here
     #************************************************#

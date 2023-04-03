@@ -1,5 +1,4 @@
 from tkinter import *
-import mysql.connector
 from admin_utils import UniversityAdmin
 
 class InterfaceWindow(Toplevel):
@@ -14,8 +13,7 @@ class InterfaceWindow(Toplevel):
 
         Label(self, text='Welcome', font='ar 15 bold', foreground='red').pack(side=TOP, pady=10)
 
-        admin = UniversityAdmin(self.connection, self.master)
-
+        admin = UniversityAdmin(connection, self.master)
         Button(self, text='Add Student', command=admin.add_student).pack(pady=15)
         Button(self, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
         Button(self, text='Show Info', command=admin.show_student_info).pack(pady=15)
