@@ -10,14 +10,13 @@ class MainWindow():
         self.root = Tk()
         self.root.geometry('500x300')
 
-        Label(self.root, text='Login', font='ar 15 bold', foreground='blue').grid(row = 0, column=0)
+        Label(self.root, text='Login to server', font='ar 15 bold', foreground='blue').grid(row = 0, column=0)
         
         username = Label(self.root, text='Username', foreground='green')
         password = Label(self.root, text='Password', foreground='green')
 
         username.grid(row = 1, column= 0, pady=15)
         password.grid(row = 2, column= 0, pady=15)
-
 
         self.user_entry = Entry(self.root, width=25)
         self.pass_entry = Entry(self.root, width=25, show="*")
@@ -28,6 +27,7 @@ class MainWindow():
         Button(text = 'Login', command = self.__login).grid(row = 3, column = 0, pady=15)
         Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 3, column = 1, pady=15)
 
+        Label(self.root, text='NOTE: Enter your root password here', foreground='red').grid(row=4, column=0)
         #For quick connection remove later!!
         self.__connect('root', '21012003')
         
