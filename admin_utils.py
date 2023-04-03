@@ -15,11 +15,17 @@ class UniversityAdmin():
         new_win.title('Add Student')
         new_win.geometry(self.master.geometry())
 
-        ID, name, dept, DOB = window_utils.populate_add_student_gui(new_win=new_win)
-        utils.add_student_query(ID, name, dept, DOB)
+        ID, first_name, last_name, dept, DOB = window_utils.populate_add_student_gui(new_win=new_win)
+        utils.add_student_query(self.connection, ID, first_name, last_name, dept, DOB)
 
-    def remove_student():
-        pass
+    def remove_student(self):
+        
+        new_win = Toplevel(master=self.master)
+        new_win.title('Remove Student')
+        new_win.geometry(self.master.geometry())
+
+        ID = window_utils.populate_remove_student_gui(new_win = new_win)
+        utils.remove_student_query(ID)
 
     def show_student_info():
         pass

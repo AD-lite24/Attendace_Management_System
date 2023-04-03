@@ -27,6 +27,18 @@ def init_schema(connection):
     """
     )
 
+    #Initialize dept table
+    mycursor.execute(
+    """INSERT IGNORE INTO departments
+        VALUES
+            ('CSIS','NAB'),
+            ('Mech','FD1'),
+            ('EEE','FD2'),
+            ('Chemical','FD1'),
+            ('Eco', 'NAB');
+    """
+    )
+
     #create courses table
     mycursor.execute(
     """CREATE TABLE IF NOT EXISTS courses(
@@ -52,22 +64,29 @@ def init_schema(connection):
         """
     )
 
-    #create takes table
+        #create takes table
 
-    # mycursor.execute(
-    #     """CREATE TABLE IF NOT EXISTS takes(
-    #         Student_id VARCHAR(255) NOT NULL,
-    #         Course_id VARCHAR(255) NOT NULL,
-    #         Att_date DATE NOT NULL,
-    #     )
-    #     """
-    # )
+        # mycursor.execute(
+        #     """CREATE TABLE IF NOT EXISTS takes(
+        #         Student_id VARCHAR(255) NOT NULL,
+        #         Course_id VARCHAR(255) NOT NULL,
+        #         Att_date DATE NOT NULL,
+        #     )
+        #     """
+        # )
 
-def add_student_query(ID, name, dept, DOB):
-    pass
+def add_student_query(connection, ID, first_name, last_name, dept, DOB):
+        
+    mycursor = connection.cursor()
+
+    mycursor.execute(
+        f"""INSERT INTO students
+        VALUES ('{ID}','{first_name}','{last_name}','{dept}', '{DOB}');
+        """
+    )
 
 def remove_student_query(ID):
     pass
 
-#Add other utility queries here
-#***************************************#
+    #Add other utility queries here
+    #***************************************#
