@@ -20,6 +20,10 @@ class InterfaceWindow(Toplevel):
         Button(self, text = 'Register Student in Course', command = admin.register_student_course).pack(pady=15)
 
 
+    def admin_win(self):
+        pass
 
+    def faculty_win(self):
+        pass
 
         
