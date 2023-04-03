@@ -25,10 +25,20 @@ class UniversityAdmin():
         new_win.geometry(self.master.geometry())
 
         ID = window_utils.populate_remove_student_gui(new_win = new_win)
-        utils.remove_student_query(ID)
+        utils.remove_student_query(self.connection, ID)
 
     def show_student_info():
         pass
+    
+    def register_student(self):
+        
+        new_win = Toplevel(master = self.master)
+        new_win.title('Register Student in Course')
+        new_win.geometry(self.master.geometry())
+        
+        student_id, course_id = window_utils.populate_register_student_gui(new_win = new_win)
+        utils.register_student_query(self.connection, student_id, course_id)
+        #pass
 
     #Add other operations here
     #************************************************#

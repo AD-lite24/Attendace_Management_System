@@ -85,8 +85,11 @@ def add_student_query(connection, ID, first_name, last_name, dept, DOB):
         """
     )
 
-def remove_student_query(ID):
-    pass
+def remove_student_query(connection, ID):
+    mycursor = connection.cursor()
+    mycursor.execute("""DELETE FROM students where ID = '{ID}'""")
+    
+    #pass
 
     #Add other utility queries here
     #***************************************#

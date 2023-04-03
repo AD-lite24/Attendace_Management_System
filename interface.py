@@ -19,7 +19,7 @@ class InterfaceWindow(Toplevel):
         Button(self, text='Add Student', command=admin.add_student).pack(pady=15)
         Button(self, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
         Button(self, text='Show Info', command=admin.show_student_info).pack(pady=15)
-
+        Button(self, text = 'Register Student in Course', command = admin.register_student).pack(pady=15)
 
 
 
