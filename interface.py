@@ -13,8 +13,8 @@ class InterfaceWindow(Toplevel):
 
         Label(self, text='Welcome', font='ar 15 bold', foreground='red').pack(side=TOP, pady=10)
 
-        Button(self, text='Admin', command=self.admin_win).pack(pady=15)
-        Button(self, text='Faculty', command=self.faculty_win).pack(pady=15)
+        Button(self, text='Admin', command=self.admin_login).pack(pady=15)
+        Button(self, text='Faculty', command=self.faculty_login).pack(pady=15)
     
 
     def admin_win(self):
@@ -22,7 +22,7 @@ class InterfaceWindow(Toplevel):
         new_win = Toplevel(master=self)
         new_win.title('Admin functions')
         new_win.geometry(self.geometry())
-        
+
         admin = UniversityAdmin(self.connection, self.master)
         Button(new_win, text='Add Student', command=admin.add_student).pack(pady=15)
         Button(new_win, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
@@ -32,4 +32,53 @@ class InterfaceWindow(Toplevel):
     def faculty_win(self):
         pass
 
+    def admin_login(self):
         
+        new_win = Toplevel(master=self)
+        new_win.title('Admin login')
+        new_win.geometry(self.geometry())
+
+        Label(new_win, text='Login to admin account', font='ar 15 bold',
+              foreground='blue').grid(row=0, column=0)
+
+        username = Label(new_win, text='Username', foreground='green')
+        password = Label(new_win, text='Password', foreground='green')
+
+        username.grid(row=1, column=0, pady=15)
+        password.grid(row=2, column=0, pady=15)
+
+        user_entry = Entry(new_win, width=25)
+        pass_entry = Entry(new_win, width=25, show="*")
+
+        user_entry.grid(row=1, column=1, padx=5, pady=15)
+        pass_entry.grid(row=2, column=1, padx=5, pady=15)
+
+        Button(new_win, text='Login', command=self.admin_win).grid(row=3, column=0)
+        Button(new_win, text='Forgot Password').grid(row=3, column=1)
+        
+
+    def faculty_login(self):
+        
+        new_win = Toplevel(master=self)
+        new_win.title('Faculty login')
+        new_win.geometry(self.geometry())
+
+        Label(new_win, text='Login to faculty account', font='ar 15 bold',
+              foreground='blue').grid(row=0, column=0)
+
+        username = Label(new_win, text='Username', foreground='green')
+        password = Label(new_win, text='Password', foreground='green')
+
+        username.grid(row=1, column=0, pady=15)
+        password.grid(row=2, column=0, pady=15)
+
+        user_entry = Entry(new_win, width=25)
+        pass_entry = Entry(new_win, width=25, show="*")
+
+        user_entry.grid(row=1, column=1, padx=5, pady=15)
+        pass_entry.grid(row=2, column=1, padx=5, pady=15)
+
+        Button(new_win, text='Login', command=self.faculty_win).grid(
+            row=3, column=0, pady=15)
+        Button(new_win, text='Forgot Password').grid(
+            row=3, column=1, pady=15)
