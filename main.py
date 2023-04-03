@@ -58,8 +58,7 @@ class MainWindow():
                 print('Login Succesful!')
                 connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
                 utils.init_schema(connection=connection)
-                utils.add_student_query(connection, '1111', 'aaaa', 'dddd', 'CSIS', '2003-10-10')
-                new = InterfaceWindow(master=self.root, connection=connection)
+                InterfaceWindow(master=self.root, connection=connection)
 
 
     def __forgot_pass(self):

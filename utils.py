@@ -4,7 +4,6 @@ def init_schema(connection):
 
     mycursor = connection.cursor()
 
-    print(connection)
     #create student table
     mycursor.execute(
     """CREATE TABLE IF NOT EXISTS students (
@@ -93,8 +92,18 @@ def add_student_query(connection, ID, first_name, last_name, dept, DOB):
     connection.commit()
     mycursor.close()
 
-def remove_student_query(ID):
-    pass
+def remove_student_query(connection, ID):
+    
+    mycursor = connection.cursor()
+    
+    query = f"""DELETE FROM students
+            WHERE Student_id = '{ID}';
+            """
+    print(query)
+    
+    mycursor.execute(query)
+    connection.commit()
+    mycursor.close()
 
     #Add other utility queries here
     #***************************************#
