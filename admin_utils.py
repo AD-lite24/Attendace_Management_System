@@ -38,6 +38,15 @@ class UniversityAdmin():
         ID = window_utils.populate_student_info_gui(new_win=new_win)
         utils.info_student_query(self.connection, ID)
 
+    def register_student_course(self):
+
+        new_win = Toplevel(master=self.master)
+        new_win.title('Show Details')
+        new_win.geometry(self.master.geometry())
+
+        stu_ID, course_id = window_utils.populate_add_student_gui(new_win=new_win)
+        utils.register_course_student(self.connection, stu_ID, course_id)
+
 
     #Add other operations here
     #************************************************#
