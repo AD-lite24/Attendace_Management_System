@@ -8,7 +8,6 @@ class UniversityAdmin():
     def __init__(self, connection, master) -> None:
         self.connection = connection
         self.master = master
-        self.mycursor = self.connection.cursor()
 
     def add_student(self):
         
