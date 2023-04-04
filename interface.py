@@ -1,5 +1,6 @@
 from tkinter import *
 from admin_utils import UniversityAdmin
+from faculty_utils import UniversityFaculty
 import mysql.connector
 
 class InterfaceWindow(Toplevel):
@@ -33,7 +34,14 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text = 'Register Student in Course', command = admin.register_student_course).pack(pady=15)
 
     def faculty_win(self):
-        pass
+        
+        new_win = Toplevel(master=self)
+        new_win.title('Faculty functions')
+        new_win.geometry(self.geometry())
+
+        faculty = UniversityFaculty(self.connection, self.master)
+
+        #Add faculty buttons here
 
     def admin_login_win(self):
         
