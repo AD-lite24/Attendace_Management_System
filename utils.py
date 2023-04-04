@@ -1,5 +1,5 @@
 import mysql.connector
-
+from datetime import datetime 
 def init_schema(connection):
 
     mycursor = connection.cursor()
@@ -39,7 +39,6 @@ def init_schema(connection):
             ('Bio', 'FD3');
     """
     )
-
     #create courses table
     mycursor.execute(
     """CREATE TABLE IF NOT EXISTS courses(
@@ -50,6 +49,20 @@ def init_schema(connection):
         PRIMARY KEY(Course_id),
         FOREIGN KEY(Dept_name) REFERENCES departments(Dept_name),
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
+    );
+    """
+    )
+    connection.commit()
+    #create takes table
+    mycursor.execute(
+    """CREATE table if not exists Takes(
+        Student_id Varchar(255) NOT NULL,
+        Course_id Varchar(255) NOT NULL, 
+        Att_date Date NOT NULL,
+        Att_present boolean NOT NULL,
+        PRIMARY KEY(Student_id, Course_id),
+        FOREIGN KEY(Student_id) REFERENCES Students(Student_id) on delete cascade on update cascade,
+        FOREIGN KEY(Student_id) REFERENCES Coursess(Course_id) on delete cascade on update cascade
     );
     """
     )
@@ -77,6 +90,7 @@ def init_schema(connection):
         #     )
         #     """
         # )
+        #done above
     
     mycursor.close()
 
@@ -139,6 +153,8 @@ def info_student_query(connection, ID):
 def register_course_student(connection, stu_ID, course_ID):
 
     mycursor = connection.cursor()
+    current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    mycursor.execute("INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', 'True')")
 
     
 
