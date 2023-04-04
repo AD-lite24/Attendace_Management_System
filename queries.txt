@@ -1,0 +1,11 @@
+>>student with maximum attendance for a course
+select student_id, count(*) as count from takes where Att_present = 'True' AND course_id = '{course_id}' group by student_id order by count desc limit 1;
+
+>>most attended course by a student
+select course_id, count(*) as count from takes where Att_present = 'True' AND student_id = '{student_id}' group by course_id order by count desc limit 1;
+
+>>attendance for courses on a particular date
+select course_id, count(*) as count from takes where Att_present = 'True' AND Att_date = '{Att_date}' group by course_id order by count desc;
+
+>>attendance of a student in a course between two dates 
+select student_id, course_id, count(*) as count from takes where student_id = '{student_id}' AND course_id = '{course_id}' AND Att_date BETWEEN '{start_date}' AND '{end_date}' AND Att_present = 'True';
