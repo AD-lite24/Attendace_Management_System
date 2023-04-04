@@ -4,9 +4,32 @@ def init_schema(connection):
 
     mycursor = connection.cursor()
 
+    #create admin table
+    mycursor.execute(
+        """CREATE TABLE IF NOT EXISTS admins(
+            admin_id VARCHAR(255),
+            admin_password VARCHAR(255),
+            PRIMARY KEY(admin_id)
+        );
+        """
+    )
+    connection.commit()
+
+    #initialize admin table
+    mycursor.execute(
+        """INSERT IGNORE INTO admins
+            VALUES
+                ('a1','12345'),
+                ('a2','12345'),
+                ('a3','12345'),
+                ('a4','98765');
+        """
+    )
+    connection.commit()
+
     #create student table
     mycursor.execute(
-    """CREATE TABLE IF NOT EXISTS students (
+    """CREATE TABLE IF NOT EXISTS students(
         Student_id VARCHAR(255) NOT NULL,
         First_name VARCHAR(255) NOT NULL,
         Last_name VARCHAR(255) NOT NULL,

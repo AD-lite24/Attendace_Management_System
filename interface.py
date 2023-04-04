@@ -13,8 +13,8 @@ class InterfaceWindow(Toplevel):
 
         Label(self, text='Welcome', font='ar 15 bold', foreground='red').pack(side=TOP, pady=10)
 
-        Button(self, text='Admin', command=self.admin_login).pack(pady=15)
-        Button(self, text='Faculty', command=self.faculty_login).pack(pady=15)
+        Button(self, text='Admin', command=self.admin_login_win).pack(pady=15)
+        Button(self, text='Faculty', command=self.facult_login_win).pack(pady=15)
     
 
     def admin_win(self):
@@ -32,7 +32,7 @@ class InterfaceWindow(Toplevel):
     def faculty_win(self):
         pass
 
-    def admin_login(self):
+    def admin_login_win(self):
         
         new_win = Toplevel(master=self)
         new_win.title('Admin login')
@@ -57,7 +57,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text='Forgot Password').grid(row=3, column=1)
         
 
-    def faculty_login(self):
+    def facult_login_win(self):
         
         new_win = Toplevel(master=self)
         new_win.title('Faculty login')
@@ -82,3 +82,9 @@ class InterfaceWindow(Toplevel):
             row=3, column=0, pady=15)
         Button(new_win, text='Forgot Password').grid(
             row=3, column=1, pady=15)
+
+    def admin_login_infra():
+        pass
+
+    def faculty_login_infra():
+        pass
