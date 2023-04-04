@@ -46,6 +46,12 @@ class UniversityAdmin():
         stu_ID, course_id = window_utils.populate_register_student_gui(new_win=new_win)
         utils.register_course_student(self.connection, stu_ID, course_id)
 
+    def employee_attendance(self):
+        new_win = Toplevel(master=self.master)
+        new_win.title('Employee Attendance')
+        new_win.geometry(self.master.geometry())
+        emp_ID = window_utils.populate_employee_attendance_gui(new_win=new_win)
+        utils.employee_attendance(self.connection, emp_ID)
 
     #Add other operations here
     #************************************************#

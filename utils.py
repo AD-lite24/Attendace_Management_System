@@ -208,6 +208,10 @@ def register_course_student(connection, stu_ID, course_ID):
     mycursor.execute("INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', 'True')")
 
 
+def employee_attendance(connection, emp_ID):
+    mycursor = connection.cursor()
+    current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    mycursor.execute("INSERT INTO Employee_Records values ('{emp_ID}', '{current_date}', 'True')")
     
 
     #Add other utility queries here

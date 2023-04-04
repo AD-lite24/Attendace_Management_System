@@ -44,7 +44,7 @@ class MainWindow():
             self.pass_entry.delete(0, 100)
         
         correct_user = 'root'
-        correct_pass = '24112003'
+        correct_pass = '21012003'
         if self.user_entry.get() != correct_user:
             print("Wrong Username!")
             delete_text()
