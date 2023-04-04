@@ -8,11 +8,7 @@ def populate_add_student_gui(new_win):
     last_name = StringVar()
     dept = StringVar()
     DOB = StringVar()
-    kill = False
-
-    def setKill():
-        kill = True
-        new_win.destroy()
+    
 
     stu_first_name = Label(new_win, text='First name:', foreground='green')
     stu_first_name.grid(row=0, column=0, pady=5)
@@ -45,15 +41,14 @@ def populate_add_student_gui(new_win):
     e_DOB.grid(row=4, column=1, pady=5)
 
     Button(master=new_win, text='Submit', command=new_win.destroy).grid(row = 5, column=1, pady=5)
-    Button(master=new_win, text='Cancel', command=setKill).grid(row=5, column=0, pady=5)
+    Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=5, column=0, pady=5)
 
     new_win.grab_set()
     new_win.wait_window()
 
-    if not kill:
-        return ID.get(), first_name.get(), last_name.get(), dept.get(), DOB.get()
-    else:
-        return None
+    
+    return ID.get(), first_name.get(), last_name.get(), dept.get(), DOB.get()
+    
     
 
 #Add other gui functions here
@@ -70,6 +65,8 @@ def populate_remove_student_gui(new_win):
     e_id.pack()
 
     Button(master=new_win, text='Submit', command=new_win.destroy).pack()
+    Button(master=new_win, text='Cancel', command=new_win.destroy).pack()
+
 
     new_win.grab_set()
     new_win.wait_window()
@@ -87,6 +84,7 @@ def populate_student_info_gui(new_win):
     e_id.pack()
 
     Button(master=new_win, text='Submit', command=new_win.destroy).pack()
+    Button(master=new_win, text='Cancel', command=new_win.destroy).pack()
 
     new_win.grab_set()
     new_win.wait_window()
@@ -111,6 +109,8 @@ def populate_register_student_gui(new_win):
     e_cid.grid(row = 1, column = 1, pady = 5)
     
     Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 2, column=1, pady=5)
+    Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=2, column=0, pady=5)
+
     new_win.grab_set()
     new_win.wait_window()
     
