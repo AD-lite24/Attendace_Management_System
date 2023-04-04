@@ -1,5 +1,6 @@
 from tkinter import *
 from admin_utils import UniversityAdmin
+import mysql.connector
 
 class InterfaceWindow(Toplevel):
     
@@ -10,11 +11,13 @@ class InterfaceWindow(Toplevel):
         self.geometry(master.geometry())
         self.master = master
         self.connection = connection
+        self.validate = False
+
 
         Label(self, text='Welcome', font='ar 15 bold', foreground='red').pack(side=TOP, pady=10)
 
-        Button(self, text='Admin', command=self.admin_login).pack(pady=15)
-        Button(self, text='Faculty', command=self.faculty_login).pack(pady=15)
+        Button(self, text='Admin', command=self.admin_login_win).pack(pady=15)
+        Button(self, text='Faculty', command=self.faculty_login_win).pack(pady=15)
     
 
     def admin_win(self):
@@ -32,7 +35,7 @@ class InterfaceWindow(Toplevel):
     def faculty_win(self):
         pass
 
-    def admin_login(self):
+    def admin_login_win(self):
         
         new_win = Toplevel(master=self)
         new_win.title('Admin login')
@@ -53,11 +56,12 @@ class InterfaceWindow(Toplevel):
         user_entry.grid(row=1, column=1, padx=5, pady=15)
         pass_entry.grid(row=2, column=1, padx=5, pady=15)
 
-        Button(new_win, text='Login', command=self.admin_win).grid(row=3, column=0)
-        Button(new_win, text='Forgot Password').grid(row=3, column=1)
-        
+        Button(new_win, text='Login', command=lambda:self.admin_login_infra(
+            new_win, user_entry.get(), pass_entry.get())).grid(row=3, column=0)
 
-    def faculty_login(self):
+        Button(new_win, text='Forgot Password').grid(row=3, column=1)
+
+    def faculty_login_win(self):
         
         new_win = Toplevel(master=self)
         new_win.title('Faculty login')
@@ -82,3 +86,33 @@ class InterfaceWindow(Toplevel):
             row=3, column=0, pady=15)
         Button(new_win, text='Forgot Password').grid(
             row=3, column=1, pady=15)
+
+    def admin_login_infra(self, new_win, username, password):
+        
+        mycursor = self.connection.cursor()
+        mycursor.execute(
+            f"""SELECT * FROM admins
+                WHERE admin_id = '{username}';
+            """
+        )
+
+        out = mycursor.fetchone()
+
+        if (out == None):
+            print('Admin User not found')
+            return
+        
+        else:
+            stored_pwd = out[1]
+
+            if stored_pwd == password:
+                print(f'Welcome admin {username}')
+                new_win.destroy()
+                self.admin_win()
+                return
+            else:
+                print('Wrong Password!')
+                return
+
+    def faculty_login_infra():
+        pass
