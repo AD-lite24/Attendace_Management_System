@@ -32,6 +32,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
         Button(new_win, text='Show Info', command=admin.show_student_info).pack(pady=15)
         Button(new_win, text = 'Register Student in Course', command = admin.register_student_course).pack(pady=15)
+        Button(new_win, text = 'Mark Employee Attendance', command = admin.employee_attendance).pack(pady=15)
 
     def faculty_win(self):
         
@@ -97,30 +98,33 @@ class InterfaceWindow(Toplevel):
 
     def admin_login_infra(self, new_win, username, password):
         
-        mycursor = self.connection.cursor()
-        mycursor.execute(
-            f"""SELECT * FROM admins
-                WHERE admin_id = '{username}';
-            """
-        )
+        self.admin_win()
+        new_win.destroy()
+        return
+    
+        # mycursor = self.connection.cursor()
+        # mycursor.execute(
+        #     f"""SELECT * FROM admins
+        #         WHERE admin_id = '{username}';
+        #     """
+        # )
+        # out = mycursor.fetchone()
 
-        out = mycursor.fetchone()
-
-        if (out == None):
-            print('Admin User not found')
-            return
+        # if (out == None):
+        #     print('Admin User not found')
+        #     return
         
-        else:
-            stored_pwd = out[1]
+        # else:
+        #     stored_pwd = out[1]
 
-            if stored_pwd == password:
-                print(f'Welcome admin {username}')
-                new_win.destroy()
-                self.admin_win()
-                return
-            else:
-                print('Wrong Password!')
-                return
+        #     if stored_pwd == password:
+        #         print(f'Welcome admin {username}')
+        #         new_win.destroy()
+        #         self.admin_win()
+        #         return
+        #     else:
+        #         print('Wrong Password!')
+        #         return
 
     def faculty_login_infra():
         pass

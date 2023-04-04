@@ -115,6 +115,20 @@ def populate_register_student_gui(new_win):
     new_win.wait_window()
     
     return Student_id.get(), Course_id.get()
+
+def populate_employee_attendance_gui(new_win):
+    Employee_id = StringVar()
+    emp_id = Label(new_win, text='ID:', foreground='green')
+    emp_id.grid(row = 0, column=0, pady = 5)
+
+    e_id = Entry(new_win, width=25)
+    e_id.grid(row = 0, column = 1, pady = 5)
+    
+    Button(master=new_win, text='Mark Attendance', command=new_win.destroy).grid(row = 1, column=1, pady=5)
+    new_win.grab_set()
+    new_win.wait_window()
+    
+    return Employee_id.get()
     
 
 
