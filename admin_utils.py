@@ -16,7 +16,11 @@ class UniversityAdmin():
         new_win.geometry(self.master.geometry())
 
         ID, first_name, last_name, dept, DOB = window_utils.populate_add_student_gui(new_win=new_win)
-        utils.add_student_query(self.connection, ID, first_name, last_name, dept, DOB)
+        
+        if (ID == ''):
+            return
+        else:
+            utils.add_student_query(self.connection, ID, first_name, last_name, dept, DOB)
 
 
     def remove_student(self):

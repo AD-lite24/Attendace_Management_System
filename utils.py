@@ -112,7 +112,7 @@ def init_schema(connection):
         Att_present boolean NOT NULL,
         PRIMARY KEY(Student_id, Course_id),
         FOREIGN KEY(Student_id) REFERENCES Students(Student_id) on delete cascade on update cascade,
-        FOREIGN KEY(Student_id) REFERENCES Coursess(Course_id) on delete cascade on update cascade
+        FOREIGN KEY(Student_id) REFERENCES Courses(Course_id) on delete cascade on update cascade
     );
     """
     )

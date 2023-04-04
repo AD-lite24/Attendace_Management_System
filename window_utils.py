@@ -8,6 +8,11 @@ def populate_add_student_gui(new_win):
     last_name = StringVar()
     dept = StringVar()
     DOB = StringVar()
+    kill = False
+
+    def setKill():
+        kill = True
+        new_win.destroy()
 
     stu_first_name = Label(new_win, text='First name:', foreground='green')
     stu_first_name.grid(row=0, column=0, pady=5)
@@ -40,11 +45,15 @@ def populate_add_student_gui(new_win):
     e_DOB.grid(row=4, column=1, pady=5)
 
     Button(master=new_win, text='Submit', command=new_win.destroy).grid(row = 5, column=1, pady=5)
+    Button(master=new_win, text='Cancel', command=setKill).grid(row=5, column=0, pady=5)
 
     new_win.grab_set()
     new_win.wait_window()
 
-    return ID.get(), first_name.get(), last_name.get(), dept.get(), DOB.get()
+    if not kill:
+        return ID.get(), first_name.get(), last_name.get(), dept.get(), DOB.get()
+    else:
+        return None
     
 
 #Add other gui functions here
