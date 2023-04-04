@@ -40,20 +40,6 @@ def init_schema(connection):
     """
     )
 
-    #create courses table
-    mycursor.execute(
-    """CREATE TABLE IF NOT EXISTS courses(
-        Course_id VARCHAR(255) NOT NULL,
-        Credits int,
-        Emp_id VARCHAR(255), 
-        Dept_name VARCHAR(255) NOT NULL,
-        PRIMARY KEY(Course_id),
-        FOREIGN KEY(Dept_name) REFERENCES departments(Dept_name),
-        FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
-    );
-    """
-    )
-    connection.commit()
     #create employee table
     mycursor.execute(
         """CREATE TABLE IF NOT EXISTS employees(
@@ -63,6 +49,34 @@ def init_schema(connection):
             PRIMARY KEY (Emp_id)
         );
         """
+    )
+    connection.commit()
+
+    #Create Instructor table
+    mycursor.execute(
+        """CREATE TABLE IF NOT EXISTS instructors(
+            Emp_id VARCHAR(255),
+            Dept_name VARCHAR(255),
+            Password VARCHAR(255),
+            PRIMARY KEY (Emp_id),
+            FOREIGN KEY (Dept_name) REFERENCES departments(Dept_name)
+        );
+        """
+    )
+    connection.commit()
+
+    #create courses table
+    mycursor.execute(
+    """CREATE TABLE IF NOT EXISTS courses(
+        Course_id VARCHAR(255) NOT NULL,
+        Credits int,
+        Emp_id VARCHAR(255), 
+        Dept_name VARCHAR(255) NOT NULL,
+        PRIMARY KEY(Course_id),
+        FOREIGN KEY(Dept_name) REFERENCES departments(Dept_name),
+        FOREIGN KEY(Emp_id) REFERENCES instructors(Emp_id)
+    );
+    """
     )
     connection.commit()
     
