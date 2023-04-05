@@ -205,14 +205,24 @@ def register_course_student(connection, stu_ID, course_ID):
 
     mycursor = connection.cursor()
     current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    mycursor.execute("INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', 'True')")
+    mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', 'True')")
 
 
 def employee_attendance(connection, emp_ID):
     mycursor = connection.cursor()
     current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    mycursor.execute("INSERT INTO Employee_Records values ('{emp_ID}', '{current_date}', 'True')")
+    mycursor.execute(f"INSERT INTO Employee_Records values ('{emp_ID}', '{current_date}', 'True')")
     
-
+def check_student_attendance(connection, course_id):
+    mycursor = connection.cursor()
+    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and Att_present = 'True' group by Student_id order by count")
+    out = mycursor.fetchall()
+    for i in out:
+        print("Student id: ", i[0])
+        print("\t Attendance count: ", i[1])
+        print("\n")
+    connection.commit()
+    mycursor.close()
+    
     #Add other utility queries here
     #***************************************#
