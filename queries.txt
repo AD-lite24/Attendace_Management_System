@@ -7,5 +7,5 @@ select course_id, count(*) as count from takes where Att_present = 'True' AND st
 >>attendance for courses on a particular date
 select course_id, count(*) as count from takes where Att_present = 'True' AND Att_date = '{Att_date}' group by course_id order by count desc;
 
->>attendance of a student in a course between two dates 
-select student_id, course_id, count(*) as count from takes where student_id = '{student_id}' AND course_id = '{course_id}' AND Att_date BETWEEN '{start_date}' AND '{end_date}' AND Att_present = 'True';
+>>attendance of a student in a course between two dates : start_date and end_date are in yyyy-mm-dd format
+select student_id, course_id, count(*) as count from takes where student_id = '{student_id}' AND course_id = '{course_id}' AND Att_date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND Att_present = 'True';
