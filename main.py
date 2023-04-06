@@ -50,8 +50,8 @@ class MainWindow():
             if connection.is_connected():
 
                 mycursor = connection.cursor()
-                mycursor.execute('CREATE DATABASE IF NOT EXISTS university_a;')
-                mycursor.execute('USE university_a;')
+                mycursor.execute('CREATE DATABASE IF NOT EXISTS university_b;')
+                mycursor.execute('USE university_b;')
                 db_Info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_Info)
                 cursor = connection.cursor()
@@ -60,6 +60,7 @@ class MainWindow():
                 print("You're connected to database: ", record)
                 connection.commit()
                 mycursor.close()
+                utils.init_schema(connection)
                 return connection
 
         except Error as e:
