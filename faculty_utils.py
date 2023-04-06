@@ -35,7 +35,12 @@ class UniversityFaculty():
             utils.check_student_attendance(self.connection, course_id)
 
     def get_student_reports(self):
-        pass
+        
+        new_win = Toplevel(master=self.master)
+        new_win.title('Student reports')
+        new_win.geometry(self.master.geometry())
+
+        window_utils.populate_student_report_gui(new_win=new_win)
        
             
     
