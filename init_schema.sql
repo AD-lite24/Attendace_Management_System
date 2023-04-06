@@ -54,7 +54,7 @@ CREATE table if not exists Takes(
         Student_id Varchar(255) NOT NULL,
         Course_id Varchar(255) NOT NULL, 
         Att_date Date NOT NULL,
-        Att_present boolean NULL,
+        Att_present boolean NULL default NULL,
         PRIMARY KEY(Student_id, Course_id, Att_date),
         FOREIGN KEY(Student_id) REFERENCES Students(Student_id) on delete cascade on update cascade,
         FOREIGN KEY(Student_id) REFERENCES Courses(Course_id) on delete cascade on update cascade

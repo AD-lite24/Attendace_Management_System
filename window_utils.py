@@ -107,14 +107,19 @@ def populate_register_student_gui(new_win):
 
     e_cid = Entry(new_win, width=25)
     e_cid.grid(row = 1, column = 1, pady = 5)
-    
-    Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 2, column=1, pady=5)
-    Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=2, column=0, pady=5)
+    options = StringVar()
+    options.set("Null")
+    markAtt = Label(new_win, text = "Select", width = 10, foreground='green')
+    markAtt.grid(row = 2, column = 0)
+    AttSelect = OptionMenu(new_win, options, "Null", "Present", "Absent")
+    AttSelect.grid(row = 2, column = 1)
+    Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 3, column=1, pady=5)
+    Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=3, column=0, pady=5)
 
     new_win.grab_set()
     new_win.wait_window()
     
-    return Student_id.get(), Course_id.get()
+    return Student_id.get(), Course_id.get(), options.get()
 
 def populate_employee_attendance_gui(new_win):
     Employee_id = StringVar()
