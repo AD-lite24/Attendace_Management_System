@@ -93,7 +93,7 @@ class InterfaceWindow(Toplevel):
 
         Button(new_win, text='Login', command=self.faculty_win).grid(
             row=3, column=0, pady=15)
-        Button(new_win, text='Forgot Password').grid(
+        Button(new_win, text='Forgot Password', command=self.faculty_forgot_pass_infra).grid(
             row=3, column=1, pady=15)
 
     def admin_login_infra(self, new_win, username, password):
@@ -108,6 +108,7 @@ class InterfaceWindow(Toplevel):
         #         WHERE admin_id = '{username}';
         #     """
         # )
+        # self.connection.commit()
         # out = mycursor.fetchone()
 
         # if (out == None):
@@ -128,5 +129,79 @@ class InterfaceWindow(Toplevel):
 
     def faculty_login_infra(self, new_win, username, password):
         self.faculty_win()
+        new_win.destroy()
+        return
+
+    def faculty_forgot_pass_win(self):
+
+        new_win = Toplevel(master=self)
+        new_win.title('Forgot Password')
+        new_win.geometry(self.geometry())
+
+        Label(new_win, text='Enter Username', foreground='green').grid(row=0, column=0, padx=15, pady=15)
+        e_username = Entry(new_win, width=25)
+        e_username.grid(row=0, column=1, padx=15, pady=15)
+        Label(new_win, text='Favorite color', foreground='green').grid(row=1, column=0, padx=15, pady=15)
+        e_colour = Entry(new_win, width=25)
+        e_colour.grid(row=1, column=1, padx=15, pady=15)
+
+        Button(new_win, text='Verify', command=lambda:self.faculty_forgot_pass_infra(
+            new_win, e_username.get(), e_colour.get() 
+        )).grid(row=3, column=0)
+        
+    
+    def faculty_forgot_pass_infra(self, new_win, username, colour):
+
+        mycursor = self.connection.cursor()
+        mycursor.execute(
+            f"""SELECT * FROM instructors
+                WHERE emp_id = '{username}';
+            """
+        )
+        self.connection.commit()
+        out = mycursor.fetchone()
+
+        if (out == None):
+            print('Instructor not found')
+            return
+        
+        else:
+            stored_fav_colour = out[1]
+
+            if stored_fav_colour == colour:
+                self.update_password_win(new_win, username)
+                mycursor.close()
+                self.faculty_win()
+                new_win.destroy()
+                return
+            else:
+                print('Wrong safe key')
+                mycursor.close()
+                return
+
+    def update_password_win(self, master, username):
+        
+        new_win = Toplevel(master)
+        new_win.title('Enter new password')
+        new_win.geometry(master.geometry())
+
+        Label(new_win, text='Enter New Password', foreground='green').pack(pady=20)
+        e_pass = Entry(new_win, width=25)
+        e_pass.pack()
+
+        new_pass = e_pass.get()
+
+        mycursor = self.connection.cursor()
+
+        mycursor.execute(
+            f"""UPDATE instructors
+                SET
+                    Password = '{new_pass}'
+                WHERE
+                    Emp_id = '{username}';
+            """
+        )
+        self.connection.commit()
+        print('Password updated successfully')
         new_win.destroy()
         return
