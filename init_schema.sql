@@ -60,3 +60,12 @@ CREATE table if not exists Takes(
         FOREIGN KEY(Student_id) REFERENCES Courses(Course_id) on delete cascade on update cascade
     );
 
+CREATE TABLE IF NOT EXISTS Employee_records(
+        Emp_id VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        Present boolean default NULL,
+        Permission boolean default False,
+        PRIMARY KEY(Emp_id, date),
+        FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
+    );
+
