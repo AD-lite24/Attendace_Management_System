@@ -201,4 +201,40 @@ def populate_faculty_leave_gui(new_win):
 
     return Date.get(), ID.get()
 
+def populate_add_faculty_gui(new_win):
+
+    ID = StringVar()
+    Name = StringVar()
+    DOB = StringVar()
+    Dept = StringVar()
+    Pwd = StringVar()
+    Colour = StringVar()
+
+    Label(new_win, text='ID:', foreground='green').grid(row=0, column=0, padx=15, pady=15)
+    Label(new_win, text='Name:', foreground='green').grid(row=1, column=0, padx=15, pady=15)
+    Label(new_win, text='DOB:', foreground='green').grid(row=2, column=0, padx=15, pady=15)
+    Label(new_win, text='Dept:', foreground='green').grid(row=3, column=0, padx=15, pady=15)
+    Label(new_win, text='Password:', foreground='green').grid(row=4, column=0, padx=15, pady=15)
+    Label(new_win, text='Fav colour:', foreground='green').grid(row=5, column=0, padx=15, pady=15)
+
+    e_ID = Entry(new_win, width=25, textvariable=ID)
+    e_ID.grid(row=0, column=1, padx=15, pady=5)
+    e_name = Entry(new_win, width=25, textvariable=Name)
+    e_name.grid(row=1, column=1, padx=15, pady=5)
+    e_DOB = Entry(new_win, width=25, textvariable=DOB)
+    e_DOB.grid(row=2, column=1, padx=15, pady=5)
+    e_dept = Entry(new_win, width=25, textvariable=Dept)
+    e_dept.grid(row=3, column=1, padx=15, pady=5)
+    e_Pwd = Entry(new_win, width=25, textvariable=Pwd)
+    e_Pwd.grid(row=4, column=1, padx=15, pady=5)
+    e_colour = Entry(new_win, width=25, textvariable=Colour)
+    e_colour.grid(row=5, column=1, padx=15, pady=5)
+
+    Button(new_win, text='Submit', command=new_win.destroy).grid(row=6, column=0, pady=5)
+    new_win.grab_set()
+    new_win.wait_window()
+
+    return ID.get(), Name.get(), DOB.get(), Dept.get(), Pwd.get(), Colour.get()
+    
+
 

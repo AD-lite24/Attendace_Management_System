@@ -29,6 +29,7 @@ class InterfaceWindow(Toplevel):
 
         admin = UniversityAdmin(self.connection, self.master)
         Button(new_win, text='Add Student', command=admin.add_student).pack(pady=15)
+        Button(new_win, text = 'Add faculty', command = admin.add_faculty).pack(pady=15)
         Button(new_win, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
         Button(new_win, text='Show Info', command=admin.show_student_info).pack(pady=15)  
         Button(new_win, text = 'Mark Employee Attendance', command = admin.employee_attendance).pack(pady=15)
