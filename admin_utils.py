@@ -48,11 +48,15 @@ class UniversityAdmin():
             utils.info_student_query(self.connection, ID)
 
     def employee_attendance(self):
+
         new_win = Toplevel(master=self.master)
         new_win.title('Employee Attendance')
         new_win.geometry(self.master.geometry())
         emp_ID, date = window_utils.populate_employee_attendance_gui(new_win=new_win)
         utils.employee_attendance(self.connection, emp_ID, date)
+
+    def add_faculty(self):
+        pass
 
     #Add other operations here
     #************************************************#
