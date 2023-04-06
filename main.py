@@ -32,8 +32,8 @@ class MainWindow():
     def __login(self):
         
         connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
-        if connection == None:
-            return
+        # if connection == None:
+        #     return
         InterfaceWindow(self.root, connection)
 
     def __connect(self, user, pwd):
