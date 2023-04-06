@@ -64,23 +64,22 @@ def info_student_query(connection, ID):
     connection.commit()
     mycursor.close()
 
-def register_course_student(connection, stu_ID, course_ID, value):
+def register_course_student(connection, stu_ID, course_ID, date, status):
 
     mycursor = connection.cursor()
     current_date = datetime.date.today()
-    mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', '{value}')")
+    mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', '{status}');")
     mycursor.close()
 
 
-def employee_attendance(connection, emp_ID):
+def employee_attendance(connection, emp_ID, date):
     mycursor = connection.cursor()
-    current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    mycursor.execute(f"INSERT INTO Employee_Records values ('{emp_ID}', '{current_date}', 'True')")
+    mycursor.execute(f"INSERT INTO Employee_Records values ('{emp_ID}', '{date}', 'True');")
     mycursor.close()
     
 def check_student_attendance(connection, course_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and Att_present = 'True' group by Student_id order by count")
+    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and Att_present = 'True' group by Student_id order by count;")
     out = mycursor.fetchall()
     for i in out:
         print("Student id: ", i[0])
@@ -92,5 +91,17 @@ def check_student_attendance(connection, course_id):
 def apply_for_leave(connection, date, faculty_id):
     pass
     
+    
+def coursewise_attendance(connection, date):
+    mycursor = connection.cursor()
+    mycursor.execute(f"Select Course_id, count(*) as count from takes where Att_present = 'True' AND Att_date = '{date}' group by Course_id order by count desc;")
+    out = mycursor.fetchall()
+    for i in out:
+        print("Course_id: ", i[0])
+        print("No of students: ", i[1])
+        print("\n")
+    connection.commit()
+    mycursor.close()
+
     #Add other utility queries here
     #***************************************#
