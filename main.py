@@ -54,13 +54,13 @@ class MainWindow():
                 mycursor.execute('USE university_b;')
                 db_Info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_Info)
-                cursor = connection.cursor()
-                cursor.execute("select database();")
-                record = cursor.fetchone()
-                print("You're connected to database: ", record)
+                # mycursor.execute("select database();")
+                # record = mycursor.fetchone()
+                # print("You're connected to database: ", record)
                 connection.commit()
                 mycursor.close()
-                utils.init_schema(connection)
+                utils.run_queries(connection, 'init_schema.sql')
+                utils.run_queries(connection, 'initialisation.sql')
                 return connection
 
         except Error as e:
