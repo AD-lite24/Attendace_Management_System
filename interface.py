@@ -34,6 +34,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text = 'Mark Employee Attendance', command = admin.employee_attendance).pack(pady=15)
 
     def faculty_win(self):
+
         new_win = Toplevel(master=self)
         new_win.title('Faculty functions')
         new_win.geometry(self.geometry())
