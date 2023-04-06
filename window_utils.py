@@ -130,5 +130,18 @@ def populate_employee_attendance_gui(new_win):
     
     return Employee_id.get()
     
+def populate_student_attendance_gui(new_win):
+    Course_id = StringVar()
+    c_id = Label(new_win, text = 'Course ID:', foreground='green')
+    c_id.grid(row = 0, column = 0, pady = 5)
+    
+    c_id = Entry(new_win, width = 25)
+    c_id.grid(row = 0, column = 1, pady = 5)
+    Button(master=new_win, text='Show Attendance', command=new_win.destroy).grid(row = 1, column=1, pady=5)
+    new_win.grab_set()
+    new_win.wait_window()
+    
+    return Course_id.get()
+    
 
 

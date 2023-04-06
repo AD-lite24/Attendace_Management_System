@@ -47,18 +47,6 @@ class UniversityAdmin():
         else:
             utils.info_student_query(self.connection, ID)
 
-    def register_student_course(self):
-
-        new_win = Toplevel(master=self.master)
-        new_win.title('Show Details')
-        new_win.geometry(self.master.geometry())
-
-        stu_ID, course_id = window_utils.populate_register_student_gui(new_win=new_win)
-        if stu_ID == '':
-            return
-        else:
-            utils.register_course_student(self.connection, stu_ID, course_id)
-
     def employee_attendance(self):
         new_win = Toplevel(master=self.master)
         new_win.title('Employee Attendance')

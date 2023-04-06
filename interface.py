@@ -30,19 +30,18 @@ class InterfaceWindow(Toplevel):
         admin = UniversityAdmin(self.connection, self.master)
         Button(new_win, text='Add Student', command=admin.add_student).pack(pady=15)
         Button(new_win, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
-        Button(new_win, text='Show Info', command=admin.show_student_info).pack(pady=15)
-        Button(new_win, text = 'Register Student in Course', command = admin.register_student_course).pack(pady=15)
+        Button(new_win, text='Show Info', command=admin.show_student_info).pack(pady=15)  
         Button(new_win, text = 'Mark Employee Attendance', command = admin.employee_attendance).pack(pady=15)
 
     def faculty_win(self):
-        
+
         new_win = Toplevel(master=self)
         new_win.title('Faculty functions')
         new_win.geometry(self.geometry())
-
         faculty = UniversityFaculty(self.connection, self.master)
-
-        #Add faculty buttons here
+        Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=15)
+        Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=15)
+        #pass
 
     def admin_login_win(self):
         
