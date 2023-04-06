@@ -69,12 +69,14 @@ def register_course_student(connection, stu_ID, course_ID, date, status):
     mycursor = connection.cursor()
     current_date = datetime.date.today()
     mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', '{status}');")
+    connection.commit()
     mycursor.close()
 
 
 def employee_attendance(connection, emp_ID, date):
     mycursor = connection.cursor()
     mycursor.execute(f"INSERT INTO Employee_Records values ('{emp_ID}', '{date}', 'True');")
+    connection.commit()
     mycursor.close()
     
 def check_student_attendance(connection, course_id):
@@ -103,5 +105,14 @@ def coursewise_attendance(connection, date):
     connection.commit()
     mycursor.close()
 
+
+def attendance_between_dates(connection, start_date, end_date, stu_id):
+    mycursor = connection.cursor()
+    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND Att_date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND Att_present = 'True' group by course_id order by count desc;")
+    connection.commit()
+    mycursor.close()
+    
+    
+    
     #Add other utility queries here
     #***************************************#
