@@ -14,13 +14,12 @@ class UniversityFaculty():
         new_win = Toplevel(master=self.master)
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-
-        stu_ID, course_id = window_utils.populate_register_student_gui(new_win=new_win)
+        stu_ID, course_id, value = window_utils.populate_register_student_gui(new_win=new_win)
 
         if stu_ID == '':
             return
         else:
-            utils.register_course_student(self.connection, stu_ID, course_id)
+            utils.register_course_student(self.connection, stu_ID, course_id, value)
     
     def check_student_attendance(self):
         new_win = Toplevel(master=self.master)
