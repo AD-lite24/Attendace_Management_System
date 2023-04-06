@@ -186,15 +186,19 @@ def populate_faculty_leave_gui(new_win):
 
     Label(new_win, text='ID:', foreground='green').grid(row=0, column=0, padx=15, pady=15)
     Label(new_win, text='Date:', foreground='green').grid(row=1, column=0, padx=15, pady=15)
-    e_date = Entry(new_win, width=25)
+
+    Date = StringVar()
+    ID = StringVar()
+
+    e_date = Entry(new_win, width=25, textvariable=Date)
     e_date.grid(row=1, column=1, padx=15, pady=15)
-    e_ID = Entry(new_win, width=25)
+    e_ID = Entry(new_win, width=25, textvariable=ID)
     e_ID.grid(row=0, column=1, padx=15, pady=15)
 
     Button(new_win, text='Submit', command=new_win.destroy).grid(row=2, column=0, padx=50)
     new_win.grab_set()
     new_win.wait_window()
 
-    return e_date.get(), e_ID.get()
+    return Date.get(), ID.get()
 
 
