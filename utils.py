@@ -208,7 +208,7 @@ def info_student_query(connection, ID):
 def register_course_student(connection, stu_ID, course_ID):
 
     mycursor = connection.cursor()
-    current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    current_date = datetime.date.today()
     mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{current_date}', 'True')")
 
 
