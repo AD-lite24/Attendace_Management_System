@@ -68,7 +68,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text='Login', command=lambda:self.admin_login_infra(
             new_win, user_entry.get(), pass_entry.get())).grid(row=3, column=0)
 
-        Button(new_win, text='Forgot Password').grid(row=3, column=1)
+        Button(new_win, text='Forgot Password', command=lambda:self.forgot_pass_win('admins')).grid(row=3, column=1)
 
     def faculty_login_win(self):
         
@@ -93,7 +93,7 @@ class InterfaceWindow(Toplevel):
 
         Button(new_win, text='Login', command=self.faculty_win).grid(
             row=3, column=0, pady=15)
-        Button(new_win, text='Forgot Password', command=self.faculty_forgot_pass_win).grid(
+        Button(new_win, text='Forgot Password', command=lambda:self.forgot_pass_win('instructors')).grid(
             row=3, column=1, pady=15)
 
     def admin_login_infra(self, new_win, username, password):
@@ -132,7 +132,7 @@ class InterfaceWindow(Toplevel):
         new_win.destroy()
         return
 
-    def faculty_forgot_pass_win(self):
+    def forgot_pass_win(self, type):
 
         new_win = Toplevel(master=self)
         new_win.title('Forgot Password')
@@ -145,33 +145,42 @@ class InterfaceWindow(Toplevel):
         e_colour = Entry(new_win, width=25)
         e_colour.grid(row=1, column=1, padx=15, pady=15)
 
-        Button(new_win, text='Verify', command=lambda:self.faculty_forgot_pass_infra(
-            new_win, e_username.get(), e_colour.get() 
+        Button(new_win, text='Verify', command=lambda:self.forgot_pass_infra(
+            new_win, e_username.get(), e_colour.get(), type 
         )).grid(row=3, column=0)
         
     
-    def faculty_forgot_pass_infra(self, new_win, username, colour):
+    def forgot_pass_infra(self, new_win, username, colour, type):
 
         mycursor = self.connection.cursor(buffered = True)
         
-        mycursor.execute(
-            f"""SELECT * FROM instructors
-                WHERE emp_id = '{username}';
-            """
-        )
+        if type == 'instructors':
+            mycursor.execute(
+                f"""SELECT * FROM {type}
+                    WHERE emp_id = '{username}';
+                """
+            )
+        else:
+            mycursor.execute(
+                f"""SELECT * FROM {type}
+                    WHERE admin_id = '{username}';
+                """
+            )
+
         self.connection.commit()
         out = mycursor.fetchall()
-        out = out[0]
+        
 
         if (out == None):
-            print('Instructor not found')
+            print(f'{type} not found')
             return
         
         else:
-            stored_fav_colour = out[3]
+            out = out[0]
+            stored_fav_colour = out[3] if type == 'instructors' else out[2]
 
             if stored_fav_colour == colour:
-                self.update_password_win(new_win, username)
+                self.update_password_win(new_win, username, type)
                 mycursor.close()
                 self.faculty_win()
                 new_win.destroy()
@@ -181,7 +190,7 @@ class InterfaceWindow(Toplevel):
                 mycursor.close()
                 return
 
-    def update_password_win(self, master, username):
+    def update_password_win(self, master, username, type):
         
         new_win = Toplevel(master)
         new_win.title('Enter new password')
@@ -195,14 +204,25 @@ class InterfaceWindow(Toplevel):
         new_win.grab_set()
         new_win.wait_window()
         mycursor = self.connection.cursor()
-        mycursor.execute(
-            f"""UPDATE instructors
-                SET
-                    Password = '{new_pass.get()}'
-                WHERE
-                    Emp_id = '{username}';
-            """
-        )
+
+        if type == 'instructors':
+            mycursor.execute(
+                f"""UPDATE {type}
+                    SET
+                        Password = '{new_pass.get()}'
+                    WHERE
+                        Emp_id = '{username}';
+                """
+            )
+        else:
+            mycursor.execute(
+                f"""UPDATE {type}
+                    SET
+                        Password = '{new_pass.get()}'
+                    WHERE
+                        admin_id = '{username}';
+                """
+            )
         self.connection.commit()
         print('Password updated successfully')
         mycursor.close()
