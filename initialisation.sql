@@ -30,4 +30,10 @@ insert into courses VALUES
     ('c4', 3, 'e4', 'CSIS'),
     ('c5', 2, 'e2', 'Econ');
 
+insert into Takes VALUES
+    ('s1', 'e2', '2023-04-07', 'True'),
+    ('s2', 'e3', '2023-04-08', 'True'),
+    ('s3', 'e1', '2023-04-05', 'False'),
+    ('s4', 'e4', '2023-04-06', 'True');
+
 
