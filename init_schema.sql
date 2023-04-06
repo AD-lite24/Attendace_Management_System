@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS students(
 
 CREATE TABLE IF NOT EXISTS admins(
         admin_id VARCHAR(255) NOT NULL,
-        admin_password VARCHAR(255),
+        Password VARCHAR(255),
         Fav_colour VARCHAR(255),
         PRIMARY KEY(admin_id)
     );
@@ -58,5 +58,14 @@ CREATE table if not exists Takes(
         PRIMARY KEY(Student_id, Course_id, Att_date),
         FOREIGN KEY(Student_id) REFERENCES Students(Student_id) on delete cascade on update cascade,
         FOREIGN KEY(Student_id) REFERENCES Courses(Course_id) on delete cascade on update cascade
+    );
+
+CREATE TABLE IF NOT EXISTS Employee_records(
+        Emp_id VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        Present boolean default NULL,
+        Permission boolean default False,
+        PRIMARY KEY(Emp_id, date),
+        FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
 

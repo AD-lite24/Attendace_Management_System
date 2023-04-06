@@ -87,6 +87,9 @@ def check_student_attendance(connection, course_id):
         print("\n")
     connection.commit()
     mycursor.close()
+
+def apply_for_leave(connection, date, faculty_id):
+    pass
     
     
 def coursewise_attendance(connection, date):

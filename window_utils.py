@@ -168,6 +168,7 @@ def populate_student_report_gui(new_win):
     Button(master=new_win, text='Trend 3').pack()
     Button(master=new_win, text='Trend 4').pack()
 
+
 def populate_coursewise_attendance_gui(new_win):
     Date = StringVar()
     dateL = Label(new_win, text = 'DATE:', foreground = 'green')
@@ -178,10 +179,22 @@ def populate_coursewise_attendance_gui(new_win):
     Note = Label(new_win, text = 'Please enter date in YYYY-MM-DD format', foreground='red')
     Note.grid(row = 2, column = 0, pady = 5)
     new_win.grab_set()
-    new_win.wait_window()
-    
+    new_win.wait_window() 
     return Date.get()
 
-    
+def populate_faculty_leave_gui(new_win):
+
+    Label(new_win, text='ID:', foreground='green').grid(row=0, column=0, padx=15, pady=15)
+    Label(new_win, text='Date:', foreground='green').grid(row=1, column=0, padx=15, pady=15)
+    e_date = Entry(new_win, width=25)
+    e_date.grid(row=1, column=1, padx=15, pady=15)
+    e_ID = Entry(new_win, width=25)
+    e_ID.grid(row=0, column=1, padx=15, pady=15)
+
+    Button(new_win, text='Submit', command=new_win.destroy).grid(row=2, column=0, padx=50)
+    new_win.grab_set()
+    new_win.wait_window()
+
+    return e_date.get(), e_ID.get()
 
 

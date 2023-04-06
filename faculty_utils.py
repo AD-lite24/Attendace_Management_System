@@ -9,6 +9,7 @@ class UniversityFaculty():
         self.connection = connection
         self.master = master
 
+
     def register_student_course(self):
 
         new_win = Toplevel(master=self.master)
@@ -41,9 +42,24 @@ class UniversityFaculty():
 
         window_utils.populate_student_report_gui(new_win=new_win)
        
+
     def coursewise_attendance(self):
         new_win = Toplevel(master=self.master)
         new_win.title('Coursewise Attendance')
         new_win.geometry(self.master.geometry())
         date = window_utils.populate_coursewise_attendance_gui(new_win = new_win)
+
+    def apply_for_leave(self):
+
+        new_win = Toplevel(master=self.master)
+        new_win.title('Apply for faculty leave')
+        new_win.geometry(self.master.geometry())
+
+        date, faculty_id = window_utils.populate_faculty_leave_gui(new_win=new_win)   
+
+        if date == '':
+            return
+        else:
+            utils.apply_for_leave(self.connection, date, faculty_id) 
+
     
