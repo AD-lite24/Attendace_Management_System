@@ -93,7 +93,7 @@ class InterfaceWindow(Toplevel):
 
         Button(new_win, text='Login', command=self.faculty_win).grid(
             row=3, column=0, pady=15)
-        Button(new_win, text='Forgot Password', command=self.faculty_forgot_pass_infra).grid(
+        Button(new_win, text='Forgot Password', command=self.faculty_forgot_pass_win).grid(
             row=3, column=1, pady=15)
 
     def admin_login_infra(self, new_win, username, password):
@@ -152,21 +152,23 @@ class InterfaceWindow(Toplevel):
     
     def faculty_forgot_pass_infra(self, new_win, username, colour):
 
-        mycursor = self.connection.cursor()
+        mycursor = self.connection.cursor(buffered = True)
+        
         mycursor.execute(
             f"""SELECT * FROM instructors
                 WHERE emp_id = '{username}';
             """
         )
         self.connection.commit()
-        out = mycursor.fetchone()
+        out = mycursor.fetchall()
+        out = out[0]
 
         if (out == None):
             print('Instructor not found')
             return
         
         else:
-            stored_fav_colour = out[1]
+            stored_fav_colour = out[3]
 
             if stored_fav_colour == colour:
                 self.update_password_win(new_win, username)
@@ -184,24 +186,24 @@ class InterfaceWindow(Toplevel):
         new_win = Toplevel(master)
         new_win.title('Enter new password')
         new_win.geometry(master.geometry())
+        new_pass = StringVar()
 
         Label(new_win, text='Enter New Password', foreground='green').pack(pady=20)
-        e_pass = Entry(new_win, width=25)
+        e_pass = Entry(new_win, width=25, textvariable=new_pass)
         e_pass.pack()
-
-        new_pass = e_pass.get()
-
+        Button(new_win, text='Submit', command=new_win.destroy).pack()
+        new_win.grab_set()
+        new_win.wait_window()
         mycursor = self.connection.cursor()
-
         mycursor.execute(
             f"""UPDATE instructors
                 SET
-                    Password = '{new_pass}'
+                    Password = '{new_pass.get()}'
                 WHERE
                     Emp_id = '{username}';
             """
         )
         self.connection.commit()
         print('Password updated successfully')
-        new_win.destroy()
+        mycursor.close()
         return
