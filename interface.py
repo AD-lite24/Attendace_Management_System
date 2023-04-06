@@ -42,6 +42,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=15)
         Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=15)
         Button(new_win, text= 'Reports', command=faculty.get_student_reports).pack(pady=15)
+        Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=15)
         #pass
 
     def admin_login_win(self):

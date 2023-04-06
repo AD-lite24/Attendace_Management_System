@@ -51,8 +51,8 @@ class UniversityAdmin():
         new_win = Toplevel(master=self.master)
         new_win.title('Employee Attendance')
         new_win.geometry(self.master.geometry())
-        emp_ID = window_utils.populate_employee_attendance_gui(new_win=new_win)
-        utils.employee_attendance(self.connection, emp_ID)
+        emp_ID, date = window_utils.populate_employee_attendance_gui(new_win=new_win)
+        utils.employee_attendance(self.connection, emp_ID, date)
 
     #Add other operations here
     #************************************************#
