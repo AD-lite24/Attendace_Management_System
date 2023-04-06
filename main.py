@@ -25,11 +25,8 @@ class MainWindow():
         self.pass_entry.grid(row=2, column=1, padx=5, pady=15)
 
         Button(text = 'Login', command = self.__login).grid(row = 3, column = 0, pady=15)
-
-
         Label(self.root, text='NOTE: Enter your root password here', foreground='red').grid(row=4, column=0)
        
-        
         self.root.mainloop()
 
     def __login(self):

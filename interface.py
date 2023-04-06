@@ -126,5 +126,7 @@ class InterfaceWindow(Toplevel):
         #         print('Wrong Password!')
         #         return
 
-    def faculty_login_infra():
-        pass
+    def faculty_login_infra(self, new_win, username, password):
+        self.faculty_win()
+        new_win.destroy()
+        return
