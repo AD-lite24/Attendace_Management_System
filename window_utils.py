@@ -142,6 +142,16 @@ def populate_student_attendance_gui(new_win):
     new_win.wait_window()
     
     return Course_id.get()
+
+def populate_student_report_gui(new_win):
+
+    Button(master=new_win, text='Trend 1').pack()
+    Button(master=new_win, text='Trend 2').pack()
+    Button(master=new_win, text='Trend 3').pack()
+    Button(master=new_win, text='Trend 4').pack()
+
+
+
     
 
 

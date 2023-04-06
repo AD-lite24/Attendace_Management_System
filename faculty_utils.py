@@ -34,7 +34,8 @@ class UniversityFaculty():
         else:     
             utils.check_student_attendance(self.connection, course_id)
 
-       
+    def get_student_reports(self):
+        pass
        
             
     
