@@ -1,5 +1,3 @@
-
-
 CREATE TABLE IF NOT EXISTS admins(
             admin_id VARCHAR(255),
             admin_password VARCHAR(255),
