@@ -2,6 +2,7 @@
 CREATE TABLE IF NOT EXISTS admins(
             admin_id VARCHAR(255),
             admin_password VARCHAR(255),
+            Fav_colour VARCHAR(255),
             PRIMARY KEY(admin_id)
         );
 
