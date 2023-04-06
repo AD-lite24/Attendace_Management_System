@@ -25,47 +25,25 @@ class MainWindow():
         self.pass_entry.grid(row=2, column=1, padx=5, pady=15)
 
         Button(text = 'Login', command = self.__login).grid(row = 3, column = 0, pady=15)
-        Button(text = 'Forgot Password', command = self.__forgot_pass).grid(row = 3, column = 1, pady=15)
+
 
         Label(self.root, text='NOTE: Enter your root password here', foreground='red').grid(row=4, column=0)
-        #For quick connection remove later!!
-        self.__connect('root', '21012003')
+       
         
         self.root.mainloop()
 
     def __login(self):
-
-        #AUTO LOGIN FOR TESTING REMOVE LATER
-        connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
-        InterfaceWindow(self.root, connection)
         
+        connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
+        if connection == None:
+            return
+        InterfaceWindow(self.root, connection)
+
+    def __connect(self, user, pwd):
+
         def delete_text():
             self.user_entry.delete(0, 100)
             self.pass_entry.delete(0, 100)
-        
-        correct_user = 'root'
-        correct_pass = '21012003'
-        if self.user_entry.get() != correct_user:
-            print("Wrong Username!")
-            delete_text()
-            
-        else:
-            if self.pass_entry.get() != correct_pass:
-                print('Wrong Password!')
-                delete_text()
-                
-            else:
-                print('Login Succesful!')
-                connection = self.__connect(self.user_entry.get(), self.pass_entry.get())
-                utils.init_schema(connection=connection)
-                InterfaceWindow(master=self.root, connection=connection)
-
-
-    def __forgot_pass(self):
-        pass
-    
-
-    def __connect(self, user, pwd):
 
         try:
             connection = mysql.connector.connect(host='localhost',
@@ -89,6 +67,8 @@ class MainWindow():
 
         except Error as e:
             print('Error while connecting to mysql', e)
+            delete_text()
+            return
 
     
 
