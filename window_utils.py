@@ -1,6 +1,6 @@
 from tkinter import *
 import utils
-
+from faculty_utils import UniversityFaculty
 def populate_add_student_gui(new_win):
 
     ID = StringVar()
@@ -161,12 +161,11 @@ def populate_student_attendance_gui(new_win):
     
     return Course_id.get()
 
-def populate_student_report_gui(new_win):
-
-    Button(master=new_win, text='Trend 1').pack()
-    Button(master=new_win, text='Trend 2').pack()
-    Button(master=new_win, text='Trend 3').pack()
-    Button(master=new_win, text='Trend 4').pack()
+# def populate_student_report_gui(new_win):
+#     Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=15)
+#     Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=15)
+#     Button(master=new_win, text='Trend 3').pack()
+#     Button(master=new_win, text='Trend 4').pack()
 
 
 def populate_coursewise_attendance_gui(new_win):
@@ -266,6 +265,17 @@ def populate_attendance_between_dates_gui(new_win):
 
     return StartDate.get(), EndDate.get(), StudentID.get()
 
+def populate_attendance_for_course_gui(new_win):
+    Course_id = StringVar()
+    course_id = Label(new_win, text = 'Course ID:', foreground = 'green')
+    course_id.grid(row = 0, column = 0, pady = 5)
+    course_id_Entry = Entry(new_win, width = 25)
+    course_id_Entry.grid(row = 0, column = 1, pady = 5)
+    Button(master=new_win, text='Check Attendance on Different Dates', command=new_win.destroy).grid(row = 2, column=1, pady=5)    
+    new_win.grab_set()
+    new_win.wait_window() 
+    return Course_id.get()
+
 def populate_student_leave_gui(new_win):
     
     ID = StringVar()
@@ -285,3 +295,4 @@ def populate_student_leave_gui(new_win):
     new_win.wait_window()
 
     return ID.get(), Date.get()
+

@@ -150,10 +150,24 @@ def add_faculty(connection, emp_id, name, dob, dept_name, password, fav_colour):
 def attendance_between_dates(connection, start_date, end_date, stu_id):
     mycursor = connection.cursor()
     mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND Att_date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND Att_present = 'True' group by course_id order by count desc;")
+    out = mycursor.fetchall()
+    for i in out:
+        print("Course_id: ", i[0])
+        print("No of Days Present: ", i[1])
+        print("\n")
     connection.commit()
     mycursor.close()
     
     
-    
+def attendance_for_course(connection, course_id):
+    mycursor = connection.cursor()
+    mycursor.execute(f"select Att_date, count(*) as 'No of students present' from takes where course_id = '{course_id}' and Att_present = 'True' group by Att_date order by Att_date;")
+    out = mycursor.fetchall()
+    for i in out:
+        print("Date: ", i[0])
+        print("No of Students Present: ", i[1])
+        print("\n")
+    connection.commit()
+    mycursor.close()
     #Add other utility queries here
     #***************************************#
