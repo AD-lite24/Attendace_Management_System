@@ -15,8 +15,7 @@ class UniversityFaculty():
         new_win = Toplevel(master=self.master)
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-        stu_ID, course_id, date, status = window_utils.populate_register_student_gui(new_win=new_win)
-
+        stu_ID, course_id, date, status = window_utils.populate_register_student_gui(connection= self.connection, new_win=new_win)
         if stu_ID == '':
             return
         else:
@@ -91,3 +90,12 @@ class UniversityFaculty():
         else:
             utils.attendance_for_course(self.connection, course_id)
             
+    def check_leave_permission(self, student_id, date):
+        # new_win = Toplevel(master = self.master)
+        # new_win.title('Check Leave Permission')
+        # new_win.geometry(self.master.geometry())
+
+        if student_id == '':
+            return 
+        else:
+            utils.check_leave_permission(self.connection, student_id, date)
