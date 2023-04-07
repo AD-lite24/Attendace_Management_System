@@ -38,7 +38,7 @@ class UniversityStudent():
         new_win.title('Update Info')
         new_win.geometry(self.master.geometry())
 
-        ID, new_first_name, new_last_name, new_DOB = window_utils.populate_faculty_update_info(new_win=new_win)
+        ID, new_first_name, new_last_name, new_DOB = window_utils.populate_update_info(new_win=new_win)
 
         if ID == '':
             return
