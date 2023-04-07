@@ -15,7 +15,7 @@ class UniversityFaculty():
         new_win = Toplevel(master=self.master)
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-        stu_ID, course_id, date, status = window_utils.populate_register_student_gui(connection= self.connection, new_win=new_win)
+        stu_ID, course_id, date, status = window_utils.populate_register_student_gui(new_win=new_win, connection=self.connection)
         if stu_ID == '':
             return
         else:
@@ -37,12 +37,11 @@ class UniversityFaculty():
         new_win = Toplevel(master=self.master)
         new_win.title('Student reports')
         new_win.geometry(self.master.geometry())
-        faculty = UniversityFaculty(self.connection, self.master)
         #window_utils.populate_student_report_gui(new_win=new_win)
-        Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=15)
-        Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=15)
-        Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=15)
-        Button(master=new_win, text='Check Attendance For A Course', command = faculty.attendance_for_course).pack(pady = 15)
+        Button(new_win, text= 'Check Coursewise Attendance', command=self.coursewise_attendance).pack(pady=15)
+        Button(new_win, text = 'Check Attendance Between Two Dates', command=self.attendance_between_dates).pack(pady=15)
+        Button(new_win, text = 'Check Student Attendance', command=self.check_student_attendance).pack(pady=15)
+        Button(new_win, text='Check Attendance For A Course', command=self.attendance_for_course).pack(pady = 15)
 
     def coursewise_attendance(self):
         new_win = Toplevel(master=self.master)
