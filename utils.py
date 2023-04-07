@@ -85,6 +85,9 @@ def check_student_attendance(connection, course_id):
     for i in out:
         print("Student id: ", i[0])
         print("Attendance count: ", i[1])
+    if not out:
+        print("No Student is registered in this course or no student has attended any class of this course")
+        
     connection.commit()
     mycursor.close()
 
@@ -159,7 +162,6 @@ def attendance_for_course(connection, course_id):
     for i in out:
         print("Date: ", i[0])
         print("No of Students Present: ", i[1])
-        print("\n")
     connection.commit()
     mycursor.close()
     

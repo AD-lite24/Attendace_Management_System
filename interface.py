@@ -58,7 +58,8 @@ class InterfaceWindow(Toplevel):
         new_win.geometry(self.geometry())
         student = UniversityStudent(self.connection, self.master)
 
-        Button(new_win, text='Apply for leave', command=student.apply_for_leave).pack()
+        Button(new_win, text='Apply for leave', command=student.apply_for_leave).pack(pady=15)
+        Button(new_win, text='Check Attendance', command=student.check_attendance).pack(pady=15)
 
     def admin_login_win(self):
         
