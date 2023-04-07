@@ -119,7 +119,7 @@ def populate_register_student_gui(new_win, connection):
     AttSelect = OptionMenu(new_win, options, "Null", "Present", "Absent")
     AttSelect.grid(row = 3, column = 1)
 
-    Button(master=new_win, text='Check Permission', command = lambda:utils.check_leave_permission(connection, Student_id.get(), Date.get())).grid(row = 4, column = 2, pady=5)
+    Button(master=new_win, text='Check Permission', command = lambda:utils.check_student_leave_permission(connection, Student_id.get(), Date.get())).grid(row = 4, column = 2, pady=5)
     Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 4, column=1, pady=5)
     Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=4, column=0, pady=5)
     Note = Label(new_win, text = 'YYYY-MM-DD', foreground='red')
@@ -129,7 +129,7 @@ def populate_register_student_gui(new_win, connection):
     
     return Student_id.get(), Course_id.get(), Date.get(), options.get()
 
-def populate_employee_attendance_gui(new_win):
+def populate_employee_attendance_gui(new_win, connection):
     Employee_id = StringVar()
     Date = StringVar()
     emp_id = Label(new_win, text='ID:', foreground='green')
@@ -142,10 +142,13 @@ def populate_employee_attendance_gui(new_win):
     dateL.grid(row = 1, column = 0, pady = 5)
     dateE = Entry(new_win, width = 25)
     dateE.grid(row = 1, column = 1, pady = 5)
+    Note = Label(new_win, text='YYYY-MM-DD', foreground='red')
+    Note.grid(row=1, column=2, pady=5)
     
     Button(master=new_win, text='Mark Attendance', command=new_win.destroy).grid(row = 2, column=1, pady=5)
-    Note = Label(new_win, text = 'Please enter date in YYYY-MM-DD format', foreground='red')
-    Note.grid(row = 3, column = 0, pady = 5)
+    Button(master=new_win, text='Check permission', command=lambda:utils.check_employee_leave_permission(connection, Employee_id.get(), Date.get()))
+    
+
     new_win.grab_set()
     new_win.wait_window()
     

@@ -52,7 +52,7 @@ class UniversityAdmin():
         new_win = Toplevel(master=self.master)
         new_win.title('Employee Attendance')
         new_win.geometry(self.master.geometry())
-        emp_ID, date = window_utils.populate_employee_attendance_gui(new_win=new_win)
+        emp_ID, date = window_utils.populate_employee_attendance_gui(new_win=new_win, connection=self.connection)
         if emp_ID == '':
             return
         else:

@@ -167,7 +167,7 @@ def attendance_for_course(connection, course_id):
     connection.commit()
     mycursor.close()
     
-def check_leave_permission(connection, student_id, date):
+def check_student_leave_permission(connection, student_id, date):
     mycursor = connection.cursor()
     mycursor.execute(f"select permission from Student_permission where date = '{date}' AND Student_id = '{student_id}';")
     out = mycursor.fetchall()
@@ -178,6 +178,9 @@ def check_leave_permission(connection, student_id, date):
 
     except:
         print('Leave not applied')
+
+def check_employee_leave_permission(connection, emp_id, date):
+    pass
 
 
     #Add other utility queries here
