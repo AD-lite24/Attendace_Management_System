@@ -190,6 +190,22 @@ def check_employee_leave_permission(connection, emp_id, date):
     except:
         print('Leave not applied')
 
+def update_faculty_info(connection, emp_id, new_first_name, new_last_name, new_DOB):
+    mycursor = connection.cursor()
+    mycursor.execute(
+        f"""UPDATE employees
+            SET
+                first_name = '{new_first_name}',
+                last_name = '{new_last_name}',
+                DOB = '{new_DOB}'
+            WHERE
+                emp_id = '{emp_id}';
+        """
+    )
+
+    print('Successfully updated information')
+    connection.commit()
+    mycursor.close()
 
     #Add other utility queries here
     #***************************************#

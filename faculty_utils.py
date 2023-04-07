@@ -102,3 +102,15 @@ class UniversityFaculty():
             return 
         else:
             utils.check_leave_permission(self.connection, student_id, date)
+
+    def update_info(self):
+        new_win = Toplevel(master=self.master)
+        new_win.title('Update Info')
+        new_win.geometry(self.master.geometry())
+
+        ID, new_first_name, new_last_name, new_DOB = window_utils.populate_faculty_update_info(new_win=new_win)
+
+        if ID == '':
+            return
+        else:
+            utils.update_faculty_info(self.connection, ID, new_first_name, new_last_name, new_DOB)
