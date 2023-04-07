@@ -53,10 +53,21 @@ class UniversityAdmin():
         new_win.title('Employee Attendance')
         new_win.geometry(self.master.geometry())
         emp_ID, date = window_utils.populate_employee_attendance_gui(new_win=new_win)
-        utils.employee_attendance(self.connection, emp_ID, date)
+        if emp_ID == '':
+            return
+        else:
+            utils.employee_attendance(self.connection, emp_ID, date)
 
     def add_faculty(self):
-        pass
+        
+        new_win = Toplevel(master=self.master)
+        new_win.title('Add Faculty')
+        new_win.geometry(self.master.geometry())
+        emp_id, name, dob, dept_name, password, fav_colour = window_utils.populate_add_faculty_gui(new_win=new_win)
+        if emp_id == '':
+            return
+        else:
+            utils.add_faculty(self.connection, emp_id, name, dob, dept_name, password, fav_colour)
 
     #Add other operations here
     #************************************************#

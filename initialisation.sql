@@ -50,10 +50,10 @@ INSERT IGNORE INTO courses
 
 INSERT IGNORE INTO Takes 
     VALUES
-        ('s1', 'e2', '2023-04-07', True),
-        ('s2', 'e3', '2023-04-08', True),
-        ('s3', 'e1', '2023-04-05', False),
-        ('s4', 'e4', '2023-04-06', True);
+        ('s1', 'c1', '2023-04-07', True, False),
+        ('s2', 'c2', '2023-04-08', True, False),
+        ('s3', 'c3', '2023-04-05', False, False),
+        ('s4', 'c5', '2023-04-06', True, False);
 
 
 INSERT IGNORE INTO admins
