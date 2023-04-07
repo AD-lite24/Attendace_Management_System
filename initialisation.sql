@@ -48,13 +48,20 @@ INSERT IGNORE INTO courses
         ('c5', 2, 'e2', 'Eco');
 
 
-INSERT IGNORE INTO Takes (Student_id, Course_id, date, Present, Permission)
+INSERT IGNORE INTO Takes (Student_id, Course_id, date, Present)
     VALUES
-        ('s1', 'c1', '2023-04-07', True, False),
-        ('s2', 'c2', '2023-04-08', True, False),
-        ('s3', 'c3', '2023-04-05', False, False),
-        ('s4', 'c5', '2023-04-06', True, False);
+        ('s1', 'c1', '2023-04-07', True),
+        ('s2', 'c2', '2023-04-08', True),
+        ('s3', 'c3', '2023-04-05', False),
+        ('s4', 'c5', '2023-04-06', True);
 
+INSERT IGNORE INTO Student_permission
+    VALUES
+        ('s1', '2023-05-09', True),
+        ('s1', '2023-05-10', True),
+        ('s1', '2023-05-11', True),
+        ('s1', '2023-05-12', True),
+        ('s2', '2023-05-09', True);
 
 INSERT IGNORE INTO admins
     VALUES
