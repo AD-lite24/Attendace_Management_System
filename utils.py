@@ -104,14 +104,12 @@ def faculty_apply_for_leave(connection, date, faculty_id):
     connection.commit()
     mycursor.close()
 
-def student_apply_for_leave(connection, date, student_id):
+def student_apply_for_leave(connection, student_id, date):
     mycursor = connection.cursor()
     mycursor.execute(
-        f"""UPDATE Takes
-            SET
-                Permission = True
-            WHERE
-                Emp_id = '{student_id}' AND date = '{date}';
+        f"""INSERT INTO student_permission
+            VALUES
+                ('{student_id}', '{date}', True);
         """
     )
     print(f"Successfuly applied for leave on {date}")

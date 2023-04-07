@@ -19,4 +19,4 @@ class UniversityStudent():
         if ID == '':
             return
         else:
-            utils.student_apply_for_leave(date, ID)
+            utils.student_apply_for_leave(self.connection, ID, date)
