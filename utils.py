@@ -105,6 +105,7 @@ def faculty_apply_for_leave(connection, date, faculty_id):
     mycursor.close()
 
 def student_apply_for_leave(connection, student_id, date):
+    print(student_id, date)
     mycursor = connection.cursor()
     mycursor.execute(
         f"""INSERT INTO student_permission
