@@ -1,6 +1,7 @@
 from tkinter import *
 from admin_utils import UniversityAdmin
 from faculty_utils import UniversityFaculty
+from student_utils import UniversityStudent
 import mysql.connector
 
 class InterfaceWindow(Toplevel):
@@ -19,7 +20,7 @@ class InterfaceWindow(Toplevel):
 
         Button(self, text='Admin', command=self.admin_login_win).pack(pady=15)
         Button(self, text='Faculty', command=self.faculty_login_win).pack(pady=15)
-    
+        Button(self, text='Student', command=self.student_win).pack(pady=15)
 
     def admin_win(self):
 
@@ -28,6 +29,7 @@ class InterfaceWindow(Toplevel):
         new_win.geometry(self.geometry())
 
         admin = UniversityAdmin(self.connection, self.master)
+
         Button(new_win, text='Add Student', command=admin.add_student).pack(pady=15)
         Button(new_win, text = 'Add faculty', command = admin.add_faculty).pack(pady=15)
         Button(new_win, text = 'Remove Student', command = admin.remove_student).pack(pady=15)
@@ -40,6 +42,7 @@ class InterfaceWindow(Toplevel):
         new_win.title('Faculty functions')
         new_win.geometry(self.geometry())
         faculty = UniversityFaculty(self.connection, self.master)
+
         Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=5)
         Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=5)
         Button(new_win, text= 'Reports', command=faculty.get_student_reports).pack(pady=5)
@@ -47,6 +50,14 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text= 'Leave permission', command=faculty.apply_for_leave).pack(pady=15)
         Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=5)
         
+    def student_win(self):
+        
+        new_win = Toplevel(self)
+        new_win.title('Student options')
+        new_win.geometry(self.geometry())
+        student = UniversityStudent(self.connection, self.master)
+
+        Button(new_win, text='Apply for leave', command=student.apply_for_leave).pack()
 
     def admin_login_win(self):
         
@@ -231,3 +242,4 @@ class InterfaceWindow(Toplevel):
         print('Password updated successfully')
         mycursor.close()
         return
+

@@ -90,9 +90,33 @@ def check_student_attendance(connection, course_id):
     connection.commit()
     mycursor.close()
 
-def apply_for_leave(connection, date, faculty_id):
-    pass
-    
+def faculty_apply_for_leave(connection, date, faculty_id):
+    mycursor = connection.cursor()
+    mycursor.execute(
+        f"""UPDATE Employee_records
+            SET
+                Permission = True
+            WHERE
+                Emp_id = '{faculty_id}' AND Att_date = '{date}';
+        """
+    )
+    print(f"Successfuly applied for leave on {date}")
+    connection.commit()
+    mycursor.close()
+
+def student_apply_for_leave(connection, date, student_id):
+    mycursor = connection.cursor()
+    mycursor.execute(
+        f"""UPDATE Takes
+            SET
+                Permission = True
+            WHERE
+                Emp_id = '{student_id}' AND Att_date = '{date}';
+        """
+    )
+    print(f"Successfuly applied for leave on {date}")
+    connection.commit()
+    mycursor.close()
     
 def coursewise_attendance(connection, date):
     mycursor = connection.cursor()
