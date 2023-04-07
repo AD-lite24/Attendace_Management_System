@@ -308,7 +308,7 @@ def populate_student_leave_gui(new_win):
 
     return ID.get(), Date.get()
 
-def populate_faculty_update_info(new_win):
+def populate_update_info(new_win):
 
     ID = StringVar()
     new_first_name = StringVar()
