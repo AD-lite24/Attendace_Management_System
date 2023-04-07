@@ -25,11 +25,11 @@ INSERT IGNORE INTO students
 
 INSERT IGNORE INTO employees 
     VALUES
-        ('e1', 'Kumar Matthews', '1980-05-06'),
-        ('e2', 'Larry Summer', '1981-11-17'),
-        ('e3', 'Mitchell Max', '1979-12-29'),
-        ('e4', 'Nathan Swepson', '1982-09-21'),
-        ('e5', 'Omar Khan', '1978-04-16');
+        ('e1', 'Kumar', 'Matthews', '1980-05-06'),
+        ('e2', 'Larry', 'Summer', '1981-11-17'),
+        ('e3', 'Mitchell', 'Max', '1979-12-29'),
+        ('e4', 'Nathan', 'Swepson', '1982-09-21'),
+        ('e5', 'Omar', 'Khan', '1978-04-16');
 
 
 INSERT IGNORE INTO instructors 

@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS departments(
 
 CREATE TABLE IF NOT EXISTS employees(
             Emp_id VARCHAR(255) NOT NULL,
-            Name VARCHAR(255) NOT NULL,
+            First_name VARCHAR(255) NOT NULL,
+            Last_name VARCHAR(255) NOT NULL,
             DOB DATE,
             PRIMARY KEY (Emp_id)
         );
