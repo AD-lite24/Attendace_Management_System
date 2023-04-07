@@ -91,25 +91,25 @@ def populate_student_info_gui(new_win):
 
     return ID.get()
     
-def populate_register_student_gui(new_win):
-    
+def populate_register_student_gui(new_win, connection):
+    faculty = UniversityFaculty()
     Student_id = StringVar()
     Course_id = StringVar()
     Date = StringVar()
     stu_id = Label(new_win, text='ID:', foreground='green')
     stu_id.grid(row = 0, column=0, pady = 5)
 
-    e_id = Entry(new_win, width=25)
+    e_id = Entry(new_win, width=25, textvariable=Student_id)
     e_id.grid(row = 0, column = 1, pady = 5)
     
     cou_id = Label(new_win, text='COURSE ID:', foreground='green')
     cou_id.grid(row = 1, column=0, pady = 5)
 
-    e_cid = Entry(new_win, width=25)
+    e_cid = Entry(new_win, width=25, textvariable=Course_id)
     e_cid.grid(row = 1, column = 1, pady = 5)
     dateL = Label(new_win, text = 'DATE:', foreground = 'green')
     dateL.grid(row = 2, column = 0, pady = 5)
-    dateE = Entry(new_win, width = 25)
+    dateE = Entry(new_win, width = 25, textvariable=Date)
     dateE.grid(row = 2, column = 1, pady = 5)
     options = StringVar()
     options.set("Null")
@@ -117,6 +117,7 @@ def populate_register_student_gui(new_win):
     markAtt.grid(row = 3, column = 0)
     AttSelect = OptionMenu(new_win, options, "Null", "Present", "Absent")
     AttSelect.grid(row = 3, column = 1)
+    Button(master=new_win, text='Check Leave Permission', command = utils.check_leave_permission(connection, Student_id.get(), Date.get())).grid(row = 3, column = 2)
     Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 4, column=1, pady=5)
     Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=4, column=0, pady=5)
     Note = Label(new_win, text = 'Please enter date in YYYY-MM-DD format', foreground='red')
