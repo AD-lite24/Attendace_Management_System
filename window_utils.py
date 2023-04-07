@@ -130,24 +130,24 @@ def populate_register_student_gui(new_win, connection):
     return Student_id.get(), Course_id.get(), Date.get(), options.get()
 
 def populate_employee_attendance_gui(new_win, connection):
+
     Employee_id = StringVar()
     Date = StringVar()
     emp_id = Label(new_win, text='ID:', foreground='green')
     emp_id.grid(row = 0, column=0, pady = 5)
 
-    e_id = Entry(new_win, width=25)
+    e_id = Entry(new_win, width=25, textvariable=Employee_id)
     e_id.grid(row = 0, column = 1, pady = 5)
     
     dateL = Label(new_win, text = 'DATE:', foreground = 'green')
     dateL.grid(row = 1, column = 0, pady = 5)
-    dateE = Entry(new_win, width = 25)
+    dateE = Entry(new_win, width = 25, textvariable=Date)
     dateE.grid(row = 1, column = 1, pady = 5)
     Note = Label(new_win, text='YYYY-MM-DD', foreground='red')
     Note.grid(row=1, column=2, pady=5)
     
-    Button(master=new_win, text='Mark Attendance', command=new_win.destroy).grid(row = 2, column=1, pady=5)
-    Button(master=new_win, text='Check permission', command=lambda:utils.check_employee_leave_permission(connection, Employee_id.get(), Date.get()))
-    
+    Button(master=new_win, text='Mark Attendance', command=new_win.destroy).grid(row = 2, column=0, pady=5)
+    Button(master=new_win, text='Check permission', command=lambda:utils.check_employee_leave_permission(connection, Employee_id.get(), Date.get())).grid(row=2, column=1)
 
     new_win.grab_set()
     new_win.wait_window()

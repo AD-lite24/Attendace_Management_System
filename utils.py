@@ -180,7 +180,17 @@ def check_student_leave_permission(connection, student_id, date):
         print('Leave not applied')
 
 def check_employee_leave_permission(connection, emp_id, date):
-    pass
+    mycursor = connection.cursor()
+    mycursor.execute(
+        f"select permission from employee_records where date = '{date}' AND Emp_id = '{emp_id}';")
+    out = mycursor.fetchall()
+    try:
+        out = out[0]
+        print("Leave has been applied") if out[0] == 1 else print(
+            "Leave not applied")
+
+    except:
+        print('Leave not applied')
 
 
     #Add other utility queries here
