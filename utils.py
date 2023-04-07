@@ -119,6 +119,8 @@ def add_faculty(connection, emp_id, name, dob, dept_name, password, fav_colour):
                 ('{emp_id}', '{dept_name}', '{password}', '{fav_colour}');
         """
     )
+    connection.commit()
+    mycursor.close()
 
 
 def attendance_between_dates(connection, start_date, end_date, stu_id):
