@@ -59,6 +59,8 @@ class InterfaceWindow(Toplevel):
 
         Button(new_win, text='Apply for leave', command=student.apply_for_leave).pack(pady=15)
         Button(new_win, text='Check Attendance', command=student.check_attendance).pack(pady=15)
+        Button(new_win, text='Update Info', command=student.update_info).pack(pady=15)
+
 
     def admin_login_win(self):
         
