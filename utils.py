@@ -93,11 +93,9 @@ def check_student_attendance(connection, course_id):
 def faculty_apply_for_leave(connection, date, faculty_id):
     mycursor = connection.cursor()
     mycursor.execute(
-        f"""UPDATE Employee_records
-            SET
-                Permission = True
-            WHERE
-                Emp_id = '{faculty_id}' AND date = '{date}';
+        f"""INSERT IGNORE INTO Employee_records
+            VALUES 
+                ('{faculty_id}', '{date}', NULL, True)
         """
     )
     print(f"Successfuly applied for leave on {date}")
