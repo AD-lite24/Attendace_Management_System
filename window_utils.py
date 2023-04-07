@@ -281,4 +281,7 @@ def populate_student_leave_gui(new_win):
 
     Button(master=new_win, text='Submit', command=new_win.destroy).grid(row = 3, column=1, pady=5)
    
+    new_win.grab_set()
+    new_win.wait_window()
 
+    return ID.get(), Date.get()

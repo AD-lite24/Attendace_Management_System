@@ -54,6 +54,7 @@ class InterfaceWindow(Toplevel):
         
         new_win = Toplevel(self)
         new_win.title('Student options')
+        new_win.geometry(self.geometry())
         student = UniversityStudent(self.connection, self.master)
 
         Button(new_win, text='Apply for leave', command=student.apply_for_leave).pack()
