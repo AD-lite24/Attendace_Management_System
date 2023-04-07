@@ -16,6 +16,10 @@ class UniversityFaculty():
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
         stu_ID, course_id, date, status = window_utils.populate_register_student_gui(new_win=new_win, connection=self.connection)
+        if status == 'Present':
+            status = 1
+        elif status == 'Absent':
+            status = 0
         if stu_ID == '':
             return
         else:
