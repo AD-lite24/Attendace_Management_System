@@ -35,20 +35,26 @@ class UniversityFaculty():
             utils.check_student_attendance(self.connection, course_id)
 
     def get_student_reports(self):
-        
         new_win = Toplevel(master=self.master)
         new_win.title('Student reports')
         new_win.geometry(self.master.geometry())
-
-        window_utils.populate_student_report_gui(new_win=new_win)
-       
+        faculty = UniversityFaculty(self.connection, self.master)
+        #window_utils.populate_student_report_gui(new_win=new_win)
+        Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=15)
+        Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=15)
+        Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=15)
+        Button(master=new_win, text='Check Attendance For A Course', command = faculty.attendance_for_course).pack(pady = 15)
 
     def coursewise_attendance(self):
         new_win = Toplevel(master=self.master)
         new_win.title('Coursewise Attendance')
         new_win.geometry(self.master.geometry())
         date = window_utils.populate_coursewise_attendance_gui(new_win = new_win)
-        utils.coursewise_attendance(self.connection, date)
+        if date == '':
+            return
+        else:
+            utils.coursewise_attendance(self.connection, date)
+            
         
     def apply_for_leave(self):
 
@@ -69,5 +75,19 @@ class UniversityFaculty():
         new_win.geometry(self.master.geometry())
         
         start_date, end_date, student_id = window_utils.populate_attendance_between_dates_gui(new_win = new_win)
-        utils.attendance_between_dates(self.connection, start_date, end_date, student_id)
-    
+        if student_id == '':
+            return 
+        else:
+            utils.attendance_between_dates(self.connection, start_date, end_date, student_id)
+        
+    def attendance_for_course(self):
+        new_win = Toplevel(master = self.master)
+        new_win.title('Attendance For A Course On Different Dates')
+        new_win.geometry(self.master.geometry())
+        
+        course_id = window_utils.populate_attendance_for_course_gui(new_win = new_win)
+        if course_id == '':
+            return 
+        else:
+            utils.attendance_for_course(self.connection, course_id)
+            
