@@ -81,7 +81,7 @@ def employee_attendance(connection, emp_ID, date):
     
 def check_student_attendance(connection, course_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and Att_present = True group by Student_id order by count;")
+    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and present = True group by Student_id order by count;")
     out = mycursor.fetchall()
     for i in out:
         print("Student id: ", i[0])
@@ -117,7 +117,7 @@ def student_apply_for_leave(connection, student_id, date):
     
 def coursewise_attendance(connection, date):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Course_id, count(*) as count from takes where Att_present = True AND date = '{date}' group by Course_id order by count desc;")
+    mycursor.execute(f"Select Course_id, count(*) as count from takes where present = True AND date = '{date}' group by Course_id order by count desc;")
     out = mycursor.fetchall()
     for i in out:
         print("Course_id: ", i[0])
@@ -146,7 +146,7 @@ def add_faculty(connection, emp_id, name, dob, dept_name, password, fav_colour):
 
 def attendance_between_dates(connection, start_date, end_date, stu_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND Att_present = True group by course_id order by count desc;")
+    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND present = True group by course_id order by count desc;")
     out = mycursor.fetchall()
     for i in out:
         print("Course_id: ", i[0])
@@ -158,7 +158,7 @@ def attendance_between_dates(connection, start_date, end_date, stu_id):
     
 def attendance_for_course(connection, course_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"select date, count(*) as 'No of students present' from takes where course_id = '{course_id}' and Att_present = True group by date order by date;")
+    mycursor.execute(f"select date, count(*) as 'No of students present' from takes where course_id = '{course_id}' and present = True group by date order by date;")
     out = mycursor.fetchall()
     for i in out:
         print("Date: ", i[0])
