@@ -20,3 +20,14 @@ class UniversityStudent():
             return
         else:
             utils.student_apply_for_leave(self.connection, ID, date)
+    def check_attendance(self):
+        new_win = Toplevel(self.master)
+        new_win.title('Check Attendance')
+        new_win.geometry(self.master.geometry())
+        
+        start_date, end_date, stu_ID = window_utils.populate_attendance_between_dates_gui(new_win = new_win)
+        
+        if stu_ID == '':
+            return
+        else:
+            utils.attendance_between_dates(self.connection, start_date, end_date, stu_ID)
