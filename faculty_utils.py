@@ -61,7 +61,7 @@ class UniversityFaculty():
         if date == '':
             return
         else:
-            utils.apply_for_leave(self.connection, date, faculty_id) 
+            utils.faculty_apply_for_leave(self.connection, date, faculty_id) 
 
     def attendance_between_dates(self):
         new_win = Toplevel(master=self.master)

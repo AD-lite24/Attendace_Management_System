@@ -237,11 +237,12 @@ def populate_add_faculty_gui(new_win):
     return ID.get(), Name.get(), DOB.get(), Dept.get(), Pwd.get(), Colour.get()
     
 
-
 def populate_attendance_between_dates_gui(new_win):
+
     StartDate = StringVar()
     EndDate = StringVar()
     StudentID = StringVar()
+
     date1L = Label(new_win, text = 'START DATE:', foreground = 'green')
     date1L.grid(row = 0, column = 0, pady = 5)
     date1E = Entry(new_win, width = 25)
@@ -254,9 +255,30 @@ def populate_attendance_between_dates_gui(new_win):
     Stu_ID.grid(row = 2, column = 0, pady = 5)
     Stu_IDe = Entry(new_win, width = 25)
     Stu_IDe.grid(row = 2, column = 1, pady = 5)
+
     Button(master=new_win, text='Check Attendance', command=new_win.destroy).grid(row = 3, column=1, pady=5)
+
     Note = Label(new_win, text = 'Please enter date in YYYY-MM-DD format', foreground='red')
     Note.grid(row = 4, column = 0, pady = 5)
+
     new_win.grab_set()
     new_win.wait_window() 
+
     return StartDate.get(), EndDate.get(), StudentID.get()
+
+def populate_student_leave_gui(new_win):
+    
+    ID = StringVar()
+    Date = StringVar()
+
+    Label(new_win, text='ID:', foreground = 'green').grid(row = 0, column = 0, pady=15)
+    Label(new_win, text='Date:', foreground='green').grid(row=1, column=0, pady=15)
+
+    e_ID = Entry(new_win, width=25, textvariable=ID)
+    e_ID.grid(row=0, column=1, padx=10, pady=15)
+    e_date = Entry(new_win, width=25, textvariable=Date)
+    e_date.grid(row=1, column=1, padx=10, pady=15)
+
+    Button(master=new_win, text='Submit', command=new_win.destroy).grid(row = 3, column=1, pady=5)
+   
+
