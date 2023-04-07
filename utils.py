@@ -67,7 +67,6 @@ def info_student_query(connection, ID):
 def register_course_student(connection, stu_ID, course_ID, date, status):
 
     mycursor = connection.cursor()
-    current_date = datetime.date.today()
     mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', '{status}');")
     connection.commit()
     mycursor.close()
@@ -85,8 +84,7 @@ def check_student_attendance(connection, course_id):
     out = mycursor.fetchall()
     for i in out:
         print("Student id: ", i[0])
-        print("\t Attendance count: ", i[1])
-        print("\n")
+        print("Attendance count: ", i[1])
     connection.commit()
     mycursor.close()
 
@@ -122,7 +120,6 @@ def coursewise_attendance(connection, date):
     for i in out:
         print("Course_id: ", i[0])
         print("No of students: ", i[1])
-        print("\n")
     connection.commit()
     mycursor.close()
 
@@ -146,12 +143,11 @@ def add_faculty(connection, emp_id, name, dob, dept_name, password, fav_colour):
 
 def attendance_between_dates(connection, start_date, end_date, stu_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN CAST('{start_date}' AS DATE) AND CAST('{end_date}' AS DATE) AND present = True group by course_id order by count desc;")
+    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN '{start_date}' AND '{end_date}' AND present = True group by course_id order by count desc;")
     out = mycursor.fetchall()
     for i in out:
         print("Course_id: ", i[0])
         print("No of Days Present: ", i[1])
-        print("\n")
     connection.commit()
     mycursor.close()
     
