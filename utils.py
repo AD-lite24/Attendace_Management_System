@@ -118,8 +118,8 @@ def coursewise_attendance(connection, date):
     mycursor.execute(f"Select Course_id, count(*) as count from takes where present = True AND date = '{date}' group by Course_id order by count desc;")
     out = mycursor.fetchall()
     for i in out:
-        print("Course_id: ", i[0])
-        print("No of students: ", i[1])
+        print("Course_id: ", i[0], "; No of Students: ", i[1])
+
     connection.commit()
     mycursor.close()
 
