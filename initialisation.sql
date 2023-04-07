@@ -42,18 +42,18 @@ INSERT IGNORE INTO instructors
 INSERT IGNORE INTO courses 
     VALUES
         ('c1', 3, 'e1', 'EEE'),
-        ('c2', 4, 'e2', 'Econ'),
+        ('c2', 4, 'e2', 'Eco'),
         ('c3', 2, 'e1', 'EEE'),
         ('c4', 3, 'e4', 'CSIS'),
-        ('c5', 2, 'e2', 'Econ');
+        ('c5', 2, 'e2', 'Eco');
 
 
-INSERT IGNORE INTO Takes 
+INSERT IGNORE INTO Takes (Student_id, Course_id, date, Present, Permission)
     VALUES
-        ('s1', 'c1', '2023-04-07','True', 'False'),
-        ('s2', 'c2', '2023-04-08','True', 'False'),
-        ('s3', 'c3', '2023-04-05', 'False', 'False'),
-        ('s4', 'c5', '2023-04-06','True', 'False');
+        ('s1', 'c1', '2023-04-07', True, False),
+        ('s2', 'c2', '2023-04-08', True, False),
+        ('s3', 'c3', '2023-04-05', False, False),
+        ('s4', 'c5', '2023-04-06', True, False);
 
 
 INSERT IGNORE INTO admins

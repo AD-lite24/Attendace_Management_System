@@ -53,12 +53,12 @@ CREATE TABLE IF NOT EXISTS courses(
 CREATE table if not exists Takes(
         Student_id Varchar(255) NOT NULL,
         Course_id Varchar(255) NOT NULL, 
-        Att_date Date NOT NULL,
-        Att_present boolean default NULL,
+        date Date NOT NULL,
+        Present boolean default NULL,
         Permission boolean default False,
-        PRIMARY KEY(Student_id, Course_id, Att_date),
+        PRIMARY KEY(Student_id, Course_id, date),
         FOREIGN KEY(Student_id) REFERENCES Students(Student_id) on delete cascade on update cascade,
-        FOREIGN KEY(Student_id) REFERENCES Courses(Course_id) on delete cascade on update cascade
+        FOREIGN KEY(Course_id) REFERENCES Courses(Course_id) on delete cascade on update cascade
     );
 
 CREATE TABLE IF NOT EXISTS Employee_records(
