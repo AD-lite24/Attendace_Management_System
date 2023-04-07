@@ -238,3 +238,25 @@ def populate_add_faculty_gui(new_win):
     
 
 
+def populate_attendance_between_dates_gui(new_win):
+    StartDate = StringVar()
+    EndDate = StringVar()
+    StudentID = StringVar()
+    date1L = Label(new_win, text = 'START DATE:', foreground = 'green')
+    date1L.grid(row = 0, column = 0, pady = 5)
+    date1E = Entry(new_win, width = 25)
+    date1E.grid(row = 0, column = 1, pady = 5)
+    date2L = Label(new_win, text = 'END DATE:', foreground = 'green')
+    date2L.grid(row = 1, column = 0, pady = 5)
+    date2E = Entry(new_win, width = 25)
+    date2E.grid(row = 1, column = 1, pady = 5)
+    Stu_ID = Label(new_win, text = 'STUDENT ID:', foreground = 'green')
+    Stu_ID.grid(row = 2, column = 0, pady = 5)
+    Stu_IDe = Entry(new_win, width = 25)
+    Stu_IDe.grid(row = 2, column = 1, pady = 5)
+    Button(master=new_win, text='Check Attendance', command=new_win.destroy).grid(row = 3, column=1, pady=5)
+    Note = Label(new_win, text = 'Please enter date in YYYY-MM-DD format', foreground='red')
+    Note.grid(row = 4, column = 0, pady = 5)
+    new_win.grab_set()
+    new_win.wait_window() 
+    return StartDate.get(), EndDate.get(), StudentID.get()

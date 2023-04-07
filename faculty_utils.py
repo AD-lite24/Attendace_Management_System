@@ -48,7 +48,8 @@ class UniversityFaculty():
         new_win.title('Coursewise Attendance')
         new_win.geometry(self.master.geometry())
         date = window_utils.populate_coursewise_attendance_gui(new_win = new_win)
-
+        utils.coursewise_attendance(self.connection, date)
+        
     def apply_for_leave(self):
 
         new_win = Toplevel(master=self.master)
@@ -62,4 +63,11 @@ class UniversityFaculty():
         else:
             utils.apply_for_leave(self.connection, date, faculty_id) 
 
+    def attendance_between_dates(self):
+        new_win = Toplevel(master=self.master)
+        new_win.title('Attendance Between Two Dates')
+        new_win.geometry(self.master.geometry())
+        
+        start_date, end_date, student_id = window_utils.populate_attendance_between_dates_gui(new_win = new_win)
+        utils.attendance_between_dates(self.connection, start_date, end_date, student_id)
     
