@@ -37,14 +37,14 @@ class InterfaceWindow(Toplevel):
 
         new_win = Toplevel(master=self)
         new_win.title('Faculty functions')
-        new_win.geometry("500x500")
+        new_win.geometry(self.geometry())
         faculty = UniversityFaculty(self.connection, self.master)
-        Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=15)
-        Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=15)
-        Button(new_win, text= 'Reports', command=faculty.get_student_reports).pack(pady=15)
-        Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=15)
+        Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=5)
+        Button(new_win, text = 'Check Student Attendance', command = faculty.check_student_attendance).pack(pady=5)
+        Button(new_win, text= 'Reports', command=faculty.get_student_reports).pack(pady=5)
+        Button(new_win, text= 'Check Coursewise Attendance', command=faculty.coursewise_attendance).pack(pady=5)
         Button(new_win, text= 'Leave permission', command=faculty.apply_for_leave).pack(pady=15)
-        Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=15)
+        Button(new_win, text = 'Check Attendance Between Two Dates', command=faculty.attendance_between_dates).pack(pady=5)
         
 
     def admin_login_win(self):
