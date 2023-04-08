@@ -126,12 +126,12 @@ def coursewise_attendance(connection, date):
     connection.commit()
     mycursor.close()
 
-def add_faculty(connection, emp_id, name, dob, dept_name, password, fav_colour):
+def add_faculty(connection, emp_id, first_name, last_name, dob, dept_name, password, fav_colour):
     mycursor = connection.cursor()
     mycursor.execute(
         f"""INSERT IGNORE INTO employees
             VALUES
-                ('{emp_id}', '{name}', '{dob}');
+                ('{emp_id}', '{first_name}', '{last_name}', '{dob}');
         """
     )
     mycursor.execute(
