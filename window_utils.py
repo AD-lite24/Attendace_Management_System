@@ -113,7 +113,7 @@ def populate_register_student_gui(new_win, connection):
     dateE = Entry(new_win, width = 25, textvariable=Date)
     dateE.grid(row = 2, column = 1, pady = 5)
     options = StringVar()
-    options.set("Null")
+    options.set("Choose one")
     markAtt = Label(new_win, text = "Select", width = 10, foreground='green')
     markAtt.grid(row = 3, column = 0)
     AttSelect = OptionMenu(new_win, options, "Present", "Absent")
