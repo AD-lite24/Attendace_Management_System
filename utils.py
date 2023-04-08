@@ -189,12 +189,17 @@ def check_student_leave_permission(connection, student_id, date):
     out = mycursor.fetchall()
     try:
         out = out[0]
-        print("Leave has been applied") if out[0] == 1 else print(
-            "Leave not applied")
+        if out[0]==1 :
+            print("Leave has been applied") 
+        else:
+            print("Leave not applied")
+            mycursor.execute(f"insert into student_permission values ('{student_id}', '{date}', '0');")
 
     except:
         print('Leave not applied')
-
+        mycursor.execute(f"insert into student_permission values ('{student_id}', '{date}', '0');")
+    connection.commit()
+    mycursor.close()
 def check_employee_leave_permission(connection, emp_id, date):
     mycursor = connection.cursor()
     mycursor.execute(
@@ -239,6 +244,15 @@ def update_student_info(connection, student_id, new_first_name, new_last_name, n
     )
 
     print('Successfully updated information')
+    connection.commit()
+    mycursor.close()
+    
+def absent_without_permission(connection):
+    mycursor = connection.cursor()
+    mycursor.execute("select * from student_permission where permission = 0;")
+    out = mycursor.fetchall()
+    for i in out:
+        print("Student ID: ", i[0], "; Absent on Date: ", i[1])
     connection.commit()
     mycursor.close()
 
