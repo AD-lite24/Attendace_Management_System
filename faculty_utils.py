@@ -15,7 +15,7 @@ class UniversityFaculty():
         new_win = Toplevel(master=self.master)
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-        stu_ID, course_id, date, status = window_utils.populate_student_attendance_gui(new_win=new_win, connection=self.connection)
+        stu_ID, course_id, date, status = window_utils.populate_mark_student_attendance_gui(new_win=new_win, connection=self.connection)
 
         if stu_ID == '':
             return

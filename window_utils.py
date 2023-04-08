@@ -91,7 +91,7 @@ def populate_student_info_gui(new_win):
 
     return ID.get()
     
-def populate_student_attendance_gui(new_win, connection):
+def populate_mark_student_attendance_gui(new_win, connection):
 
     Student_id = StringVar()
     Course_id = StringVar()
@@ -120,7 +120,7 @@ def populate_student_attendance_gui(new_win, connection):
     AttSelect.grid(row = 3, column = 1)
 
     Button(master=new_win, text='Check Permission', command = lambda:utils.check_student_leave_permission(connection, Student_id.get(), Date.get())).grid(row = 4, column = 2, pady=5)
-    Button(master=new_win, text='Register', command=new_win.destroy).grid(row = 4, column=1, pady=5)
+    Button(master=new_win, text='Submit', command=new_win.destroy).grid(row = 4, column=1, pady=5)
     Button(master=new_win, text='Cancel', command=new_win.destroy).grid(row=4, column=0, pady=5)
     Note = Label(new_win, text = 'YYYY-MM-DD', foreground='red')
     Note.grid(row = 2, column = 2, pady = 5)
