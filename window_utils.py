@@ -91,7 +91,7 @@ def populate_student_info_gui(new_win):
 
     return ID.get()
     
-def populate_register_student_gui(new_win, connection):
+def populate_student_attendance_gui(new_win, connection):
 
     Student_id = StringVar()
     Course_id = StringVar()
@@ -158,7 +158,7 @@ def populate_employee_attendance_gui(new_win, connection):
     new_win.grab_set()
     new_win.wait_window()
     
-    return Employee_id.get(), Date.get()
+    return Employee_id.get(), Date.get(), options.get()
     
 def populate_student_attendance_gui(new_win):
     Course_id = StringVar()

@@ -64,20 +64,41 @@ def info_student_query(connection, ID):
     connection.commit()
     mycursor.close()
 
-def register_course_student(connection, stu_ID, course_ID, date, status):
+def student_attendance(connection, stu_ID, course_ID, date, status):
 
     mycursor = connection.cursor()
-    mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', '{status}');")
+    mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', {status});")
     connection.commit()
     mycursor.close()
 
 
-def employee_attendance(connection, emp_ID, date):
+def employee_attendance(connection, emp_ID, date, status):
     mycursor = connection.cursor()
-    mycursor.execute(f"INSERT INTO Employee_Records values ('{emp_ID}', '{date}', True);")
+    mycursor.execute(
+        f"""SELECT * FROM Employee_records
+            WHERE emp_id = '{emp_ID}' AND date = '{date}';
+        """
+    )
+    out = mycursor.fetchall()
     connection.commit()
-    mycursor.close()
-    
+    print(out)
+    if len(out) == 0:
+        print("No leave applied")
+        mycursor.execute(
+            f"INSERT IGNORE INTO Employee_Records values ('{emp_ID}', '{date}', {status}, False);")
+        connection.commit()
+
+    else:
+        mycursor.execute(
+            f"""UPDATE Employee_records
+                SET
+                    Present = {status}
+                WHERE
+                    emp_id = '{emp_ID}' AND date = '{date}';
+            """
+        )
+    print(f'Marked attendance as {status}')
+
 def check_student_attendance(connection, course_id):
     mycursor = connection.cursor()
     mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and present = True group by Student_id order by count;")
