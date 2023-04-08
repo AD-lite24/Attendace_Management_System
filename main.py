@@ -8,7 +8,7 @@ class MainWindow():
     
     def __init__(self) -> None:
         self.root = Tk()
-        self.root.geometry('500x300')
+        self.root.geometry('600x300')
 
         Label(self.root, text='Login to server', font='ar 15 bold', foreground='blue').grid(row = 0, column=0)
         
