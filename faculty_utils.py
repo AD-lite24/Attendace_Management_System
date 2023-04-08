@@ -46,6 +46,7 @@ class UniversityFaculty():
         Button(new_win, text = 'Check Attendance Between Two Dates', command=self.attendance_between_dates).pack(pady=15)
         Button(new_win, text = 'Check Student Attendance', command=self.check_student_attendance).pack(pady=15)
         Button(new_win, text='Check Attendance For A Course', command=self.attendance_for_course).pack(pady = 15)
+        Button(new_win, text='Check Students Absent without Permission', command=self.absent_without_permission).pack(pady = 15)
 
     def coursewise_attendance(self):
         new_win = Toplevel(master=self.master)
@@ -114,3 +115,5 @@ class UniversityFaculty():
             return
         else:
             utils.update_faculty_info(self.connection, ID, new_first_name, new_last_name, new_DOB)
+    def absent_without_permission(self):
+        utils.absent_without_permission(self.connection)
