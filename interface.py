@@ -43,7 +43,7 @@ class InterfaceWindow(Toplevel):
         new_win.geometry(self.geometry())
         faculty = UniversityFaculty(self.connection, self.master)
 
-        Button(new_win, text = 'Register Student in Course', command = faculty.register_student_course).pack(pady=15)
+        Button(new_win, text = 'Register Student in Course', command = faculty.student_attendance).pack(pady=15)
         Button(new_win, text= 'Reports', command=faculty.get_student_reports).pack(pady=15)
         Button(new_win, text='Update Info', command=faculty.update_info).pack(pady=15)
         Button(new_win, text= 'Leave permission', command=faculty.apply_for_leave).pack(pady=15)

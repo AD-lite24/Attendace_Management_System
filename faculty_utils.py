@@ -10,20 +10,22 @@ class UniversityFaculty():
         self.master = master
 
 
-    def register_student_course(self):
+    def student_attendance(self):
 
         new_win = Toplevel(master=self.master)
         new_win.title('Show Details')
         new_win.geometry(self.master.geometry())
-        stu_ID, course_id, date, status = window_utils.populate_register_student_gui(new_win=new_win, connection=self.connection)
-        if status == 'Present':
-            status = 1
-        elif status == 'Absent':
-            status = 0
+        stu_ID, course_id, date, status = window_utils.populate_student_attendance_gui(new_win=new_win, connection=self.connection)
+
         if stu_ID == '':
             return
+            
         else:
-            utils.register_course_student(self.connection, stu_ID, course_id, date, status)
+            if status == 'Present':
+                status = 1
+            elif status == 'Absent':
+                status = 0
+            utils.student_attendance(self.connection, stu_ID, course_id, date, status)
     
     def check_student_attendance(self):
         new_win = Toplevel(master=self.master)
