@@ -138,7 +138,7 @@ def student_apply_for_leave(connection, student_id, date):
     
 def coursewise_attendance(connection, date):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Course_id, count(*) as count from takes where present = True AND date = '{date}' group by Course_id order by count desc;")
+    mycursor.execute(f"Select Course_id, sum(present) as count from takes where date = '{date}' group by Course_id order by count desc;")
     out = mycursor.fetchall()
     for i in out:
         print("Course_id: ", i[0], "; No of Students: ", i[1])
