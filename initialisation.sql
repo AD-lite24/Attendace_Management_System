@@ -117,43 +117,5 @@ INSERT IGNORE INTO admins
         ('a3','12345', 'red'),
         ('a4','98765', 'blue');
 
-INSERT IGNORE INTO Employee_records
-    VALUES
-        ('e1', '2023-04-07', False, True),
-        ('e1', '2023-04-08', False, False),
-        ('e2', '2023-04-07', True, False),
-        ('e2', '2023-04-09', False, False),
-        ('e3', '2023-05-07', True, False),
-        ('e1', '2023-01-01', True, False),
-        ('e2', '2023-01-02', True, False),
-        ('e3', '2023-01-03', True, False),
-        ('e4', '2023-01-04', True, False),
-        ('e5', '2023-01-05', True, False),
-        ('e6', '2023-01-06', True, False),
-        ('e7', '2023-01-07', True, True),
-        ('e8', '2023-01-08', True, False),
-        ('e9', '2023-01-09', False, False),
-        ('e10', '2023-01-10', True, False),
-        ('e11', '2023-01-11', True, False),
-        ('e12', '2023-01-12', True, False),
-        ('e13', '2023-01-13', True, False),
-        ('e14', '2023-01-14', True, False),
-        ('e15', '2023-01-15', True, False),
-        ('e1', '2023-01-16', True, False),
-        ('e2', '2023-01-17', True, False),
-        ('e3', '2023-01-18', False, True),
-        ('e4', '2023-01-19', False, True),
-        ('e5', '2023-01-20', True, False),
-        ('e6', '2023-01-21', False, False),
-        ('e7', '2023-01-22', True, False),
-        ('e8', '2023-01-23', True, False),
-        ('e9', '2023-01-24', True, False),
-        ('e10', '2023-01-25', True, False),
-        ('e11', '2023-01-26', False, False),
-        ('e12', '2023-01-27', True, False),
-        ('e13', '2023-01-28', True, False),
-        ('e14', '2023-01-29', True, False),
-        ('e15', '2023-01-30', True, False),
-        ('e1', '2023-01-31', True, False);
         
 

@@ -47,6 +47,7 @@ def student_takes_generator(connection):
                 connection.commit()
                 
     mycursor.close()
+    
                 
 def employee_record_generator(connection):
 

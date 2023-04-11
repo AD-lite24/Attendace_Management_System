@@ -60,6 +60,7 @@ class MainWindow():
                 utils.run_queries(connection, 'initialisation.sql', ';')
                 utils.run_queries(connection, 'proc.sql', '#')
                 generator.student_takes_generator(connection)
+                generator.employee_record_generator(connection)
                 mycursor.close()
                 return connection
 
