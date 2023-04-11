@@ -47,7 +47,6 @@ INSERT IGNORE INTO instructors
         ('e1', 'EEE', 'KMat', 'Yellow'),
         ('e2', 'Chemical', 'LSum', 'Red'),
         ('e4', 'CSIS', 'NSwe', 'Blue'),
-        ('e4', 'Bio', '9hNzF#', 'Purple'),
         ('e5', 'Chemical', 'aL8cD$', 'Yellow'),
         ('e6', 'Eco', '4sTbM@', 'Orange'),
         ('e7', 'Mech', 'cR1pK%', 'Pink'),
