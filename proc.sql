@@ -25,3 +25,9 @@ create procedure check_leave(in id Varchar(255), in d date)
 begin
     select permission from student_permission where student_id = id and date = d;
 end#
+
+drop procedure if exists employee_check_leave;#
+create procedure employee_check_leave(in id Varchar(255), in d date)
+begin
+    select permission from employee_records where Emp_id = id and date = d;
+end#
