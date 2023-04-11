@@ -2,6 +2,8 @@ from tkinter import *
 import utils
 from faculty_utils import UniversityFaculty
 
+#Window utility functions to populate various windows created wiht UI
+
 def populate_add_student_gui(new_win):
 
     ID = StringVar()

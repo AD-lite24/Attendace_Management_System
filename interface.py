@@ -4,6 +4,7 @@ from faculty_utils import UniversityFaculty
 from student_utils import UniversityStudent
 import mysql.connector
 
+#Main interface
 class InterfaceWindow(Toplevel):
     
     def __init__(self, master, connection):
@@ -22,6 +23,7 @@ class InterfaceWindow(Toplevel):
         Button(self, text='Faculty', command=self.faculty_login_win).pack(pady=15)
         Button(self, text='Student', command=self.student_win).pack(pady=15)
 
+    #Admin window
     def admin_win(self):
 
         new_win = Toplevel(master=self)
@@ -36,6 +38,7 @@ class InterfaceWindow(Toplevel):
         Button(new_win, text='Show Info', command=admin.show_student_info).pack(pady=15)  
         Button(new_win, text = 'Mark Employee Attendance', command = admin.employee_attendance).pack(pady=15)
 
+    #faculty window
     def faculty_win(self):
 
         new_win = Toplevel(master=self)

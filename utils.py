@@ -2,6 +2,7 @@ import mysql.connector
 from datetime import datetime 
 import matplotlib.pyplot as plt 
 
+#Script to run queries from the .sql files
 def run_queries(connection, filename, delimiter):
 
     mycursor = connection.cursor()

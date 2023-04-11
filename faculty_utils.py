@@ -4,6 +4,8 @@ import window_utils
 import utils
 
 class UniversityFaculty():
+    
+    #Univerisyt faculty functions
 
     def __init__(self, connection, master) -> None:
         self.connection = connection

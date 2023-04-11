@@ -5,8 +5,10 @@ import utils
 
 class UniversityStudent():
 
+    #Student functionalities
+
     def __init__(self, connection, master) -> None:
-        self.connection = connection
+        self.connection = connection            #connection is mysql connection obtained from connector
         self.master = master
 
     def apply_for_leave(self):
@@ -21,7 +23,7 @@ class UniversityStudent():
         else:
             utils.student_apply_for_leave(self.connection, ID, date)
 
-    def check_attendance(self):
+    def check_attendance(self):         
         new_win = Toplevel(self.master)
         new_win.title('Check Attendance')
         new_win.geometry(self.master.geometry())

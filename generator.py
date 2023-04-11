@@ -2,6 +2,8 @@ import random
 import datetime
 import mysql.connector
 
+#Generator scripts for sample data
+
 def student_takes_generator(connection):
 
     students = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
@@ -47,7 +49,7 @@ def student_takes_generator(connection):
                 connection.commit()
                 
     mycursor.close()
-    
+
                 
 def employee_record_generator(connection):
 

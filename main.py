@@ -5,6 +5,7 @@ from mysql.connector import Error
 from interface import InterfaceWindow
 import generator
 
+#Main tkinter window
 class MainWindow():
     
     def __init__(self) -> None:
@@ -51,6 +52,7 @@ class MainWindow():
             if connection.is_connected():
 
                 mycursor = connection.cursor()
+                #Make the necessary initializations
                 mycursor.execute('CREATE DATABASE IF NOT EXISTS university_b;')
                 mycursor.execute('USE university_b;')
                 db_Info = connection.get_server_info()
