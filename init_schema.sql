@@ -77,4 +77,4 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         PRIMARY KEY(Emp_id, date),
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
-
+    
