@@ -190,10 +190,13 @@ def add_faculty(connection, emp_id, first_name, last_name, dob, dept_name, passw
 
 def attendance_between_dates(connection, start_date, end_date, stu_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN '{start_date}' AND '{end_date}' AND present = True group by course_id order by count desc;")
+    mycursor.execute(f"select course_id, count(*) as count from takes where student_id = '{stu_id}' AND date BETWEEN '{start_date}' AND '{end_date}' group by course_id order by course_id;")
     out = mycursor.fetchall()
     for i in out:
-        print("Course_id: ", i[0], "; No of Days Present: ", i[1])
+        mycursor.execute(f"select count(*) from takes where course_id = '{i[0]}' and student_id = '{stu_id}' and date BETWEEN '{start_date}' AND '{end_date}' AND present = True;")
+        out2 = mycursor.fetchone()
+        out2 = out2[0]
+        print("Course_id: ", i[0], "; No of Days Present: ", out2, f"; Percentage of Attendance between these two dates: ", (out2*100)/i[1])
     connection.commit()
     mycursor.close()
     
