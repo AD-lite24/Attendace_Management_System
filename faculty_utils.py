@@ -117,5 +117,6 @@ class UniversityFaculty():
             return
         else:
             utils.update_faculty_info(self.connection, ID, new_first_name, new_last_name, new_DOB)
+            
     def absent_without_permission(self):
         utils.absent_without_permission(self.connection)

@@ -59,10 +59,18 @@ INSERT IGNORE INTO instructors
 INSERT IGNORE INTO courses 
     VALUES
         ('c1', 3, 'e1', 'EEE'),
-        ('c2', 4, 'e2', 'Eco'),
+        ('c2', 4, 'e2', 'Chemical'),
         ('c3', 2, 'e1', 'EEE'),
-        ('c4', 3, 'e4', 'CSIS'),
-        ('c5', 2, 'e2', 'Eco');
+        ('c4', 3, 'e4', 'Bio'),
+        ('c5', 2, 'e2', 'Chemical'),
+        ('c6', 4, 'e8', 'CSIS'),
+        ('c7', 4, 'e5', 'Chemical'),
+        ('c8', 3, 'e6', 'Eco'),
+        ('c9', 2, 'e7', 'Mech'),
+        ('c10', 2, 'e8', 'CSIS'),
+        ('c11', 2, 'e9', 'Bio'),
+        ('c12', 2, 'e10', 'Chemical');
+        
 
 
 INSERT IGNORE INTO Takes (Student_id, Course_id, date, Present)

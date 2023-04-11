@@ -77,4 +77,22 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         PRIMARY KEY(Emp_id, date),
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
+
     
+
+
+CREATE TRIGGER tr_up_id_student
+BEFORE INSERT ON students
+FOR EACH ROW
+    SET NEW.student_id = LOWER(NEW.student_id);
+
+CREATE TRIGGER tr_up_id_faculty
+BEFORE INSERT ON instructors
+FOR EACH ROW
+    SET NEW.Emp_id = LOWER(NEW.Emp_id);
+
+CREATE TRIGGER tr_up_id_emp
+BEFORE INSERT ON employees
+FOR EACH ROW
+    SET NEW.Emp_id = LOWER(NEW.Emp_id);
+

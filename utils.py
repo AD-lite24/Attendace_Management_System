@@ -1,6 +1,7 @@
 import mysql.connector
 from datetime import datetime 
-def run_queries(connection, filename):
+
+def run_queries(connection, filename, delimiter):
 
     mycursor = connection.cursor()
 
@@ -8,7 +9,7 @@ def run_queries(connection, filename):
     sqlFile = fd.read()
     fd.close()
 
-    sqlCommands = sqlFile.split(';')
+    sqlCommands = sqlFile.split(delimiter)
 
     for command in sqlCommands:
         try:
@@ -155,18 +156,21 @@ def coursewise_attendance(connection, date):
 
 def add_faculty(connection, emp_id, first_name, last_name, dob, dept_name, password, fav_colour):
     mycursor = connection.cursor()
-    mycursor.execute(
-        f"""INSERT IGNORE INTO employees
-            VALUES
-                ('{emp_id}', '{first_name}', '{last_name}', '{dob}');
-        """
-    )
-    mycursor.execute(
-        f"""INSERT IGNORE INTO instructors
-            VALUES
-                ('{emp_id}', '{dept_name}', '{password}', '{fav_colour}');
-        """
-    )
+    # mycursor.execute(
+    #     f"""INSERT IGNORE INTO employees
+    #         VALUES
+    #             ('{emp_id}', '{first_name}', '{last_name}', '{dob}');
+    #     """
+    # )
+    # mycursor.execute(
+    #     f"""INSERT IGNORE INTO instructors
+    #         VALUES
+    #             ('{emp_id}', '{dept_name}', '{password}', '{fav_colour}');
+    #     """
+    # )
+    # mycursor.execute(f'CALL addInstructor('{}', )')
+    mycursor.execute(f"""
+    CALL addInstructor('{emp_id}', '{first_name}', '{last_name}', '{dob}', '{dept_name}', '{password}', '{fav_colour}');""")
     connection.commit()
     mycursor.close()
 
