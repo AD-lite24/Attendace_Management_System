@@ -72,19 +72,18 @@ def student_attendance(connection, stu_ID, course_ID, date, status):
     mycursor = connection.cursor()
     mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', {status});")
     connection.commit()
-    mycursor.close()
+    mycursor.close()  
     if(status==False):
         mycursor = connection.cursor()
         mycursor.execute(f"call check_leave('{stu_ID}', '{date}');")
-        out = mycursor.fetchone()
+        out = mycursor.fetchone()    
         if(out!=None):
             out = out[0]
             print(f"Leave has been applied by {stu_ID} for {date}")
         else:
             print(f"No leave has been applied by {stu_ID} for {date}")
-    
-
-
+        connection.commit()
+        mycursor.close()
 def employee_attendance(connection, emp_ID, date, status):
     mycursor = connection.cursor()
     mycursor.execute(
