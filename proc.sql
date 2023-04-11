@@ -1,3 +1,5 @@
+drop procedure if exists addInstructor;#
+
 CREATE PROCEDURE addInstructor(
     IN Emp_id VARCHAR(255), 
     IN First_name VARCHAR(255), 
@@ -17,3 +19,9 @@ BEGIN
         (Emp_id, Dept_name, Password, Fav_colour);
 END #
 
+
+drop procedure if exists check_leave;#
+create procedure check_leave(in id Varchar(255), in d date)
+begin
+    select permission from student_permission where student_id = id and date = d;
+end#

@@ -78,8 +78,10 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
 
-<<<<<<< HEAD
-=======
+
+drop trigger if exists tr_up_id_student;
+drop trigger if exists tr_up_id_faculty;
+drop trigger if exists tr_up_id_emp;
 CREATE TRIGGER tr_up_id_student
 BEFORE INSERT ON students
 FOR EACH ROW
@@ -95,4 +97,4 @@ BEFORE INSERT ON employees
 FOR EACH ROW
     SET NEW.Emp_id = LOWER(NEW.Emp_id);
 
->>>>>>> baf7a5525edfde36114fbac7b0d088abc1ad7df2
+
