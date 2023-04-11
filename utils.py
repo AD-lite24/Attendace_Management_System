@@ -133,7 +133,7 @@ def faculty_apply_for_leave(connection, date, faculty_id):
     mycursor.execute(
         f"""INSERT IGNORE INTO Employee_records
             VALUES 
-                ('{faculty_id}', '{date}', NULL, True)
+                ('{faculty_id}', '{date}', NULL, True);
         """
     )
     print(f"Successfuly applied for leave on {date}")
@@ -231,6 +231,7 @@ def check_student_leave_permission(connection, student_id, date):
         mycursor.execute(f"insert into student_permission values ('{student_id}', '{date}', '0');")
     connection.commit()
     mycursor.close()
+
 def check_employee_leave_permission(connection, emp_id, date):
     mycursor = connection.cursor()
     mycursor.execute(

@@ -1,6 +1,6 @@
 --Inserts entries into the takes table
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE insert_into_takes(
     IN student_id VARCHAR(255),
     IN Course_id Varchar(255),
     IN date DATE,
@@ -15,7 +15,7 @@ delimiter ;
 
 --Insert entries into employee records table
 delimiter #
-CALL PROCEDURE insert_into_employee_records(
+CREATE PROCEDURE insert_into_employee_records(
     IN e_id VARCHAR(255),
     IN date DATE,
     IN Present boolean,
@@ -31,7 +31,7 @@ delimiter ;
 --Update passwords of instructors and admin 
 --here type can be either instructors or admins
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE update_password(
     in type Varchar(255),
     in new_pass Varchar(255),
     in employee_id Varchar(255)
@@ -87,7 +87,7 @@ end#
 
 --Add new student
 delimiter #
-CALL PROCEDURE insert_into_students(
+CREATE PROCEDURE insert_into_students(
     IN student_id VARCHAR(255),
     IN First_name Varchar(255),
     IN Last_name Varchar(255),
@@ -102,7 +102,7 @@ delimiter ;
 
 --Remove a student from the table
 delimiter #
-CALL PROCEDURE delete_from_student(
+CREATE PROCEDURE delete_from_student(
     IN ID Varchar(255)
 )
 BEGIN
@@ -113,7 +113,7 @@ delimiter ;
 
 --Get student info from the students table
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE get_student_info(
     IN ID Varchar(255)
 )
 BEGIN
@@ -124,7 +124,7 @@ delimiter ;
 
 --Get employee attendance for the day
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE get_employee_attendance(
     IN employee_id Varchar(255),
     IN today_date Date
 )
@@ -136,7 +136,7 @@ delimiter ;
 
 --Mark attendance of the employee when permission was not applied
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE mark_employee_attendance_no_permit(
     IN employee_id Varchar(255),
     IN today_date Varchar(255),
     IN Present boolean
@@ -148,7 +148,7 @@ delimiter ;
 
 --Mark attendance of the employee when permission has already been applied
 delimiter #
-CALL PROCEDURE insert_into_takes(
+CREATE PROCEDURE mark_employee_attendance_yes_permit(
     IN employee_id Varchar(255),
     IN today_date Varchar(255),
     IN Present_status boolean
@@ -162,59 +162,92 @@ UPDATE Employee_records
 END #
 delimiter ;
 
+--Check all the entries of each student registered in the course
 delimiter #
-CALL PROCEDURE insert_into_takes(
-    IN student_id VARCHAR(255),
-    IN Course_id Varchar(255),
-    IN date DATE,
-    IN Present boolean
+CREATE PROCEDURE check_course_attendance(
+    in course_id Varchar(255)
 )
 BEGIN
-INSERT IGNORE INTO takes
-    VALUES
-        ('{s}', '{c}', '{date.strftime("%Y-%m-%d")}', {status});
+Select Student_id, count(*) as count from takes where Course_id = course_id group by Student_id order by student_id;
 END #
 delimiter ;
 
+--finds amount of times the student was present in class
 delimiter #
-CALL PROCEDURE insert_into_takes(
-    IN student_id VARCHAR(255),
-    IN Course_id Varchar(255),
-    IN date DATE,
-    IN Present boolean
+CREATE PROCEDURE student_attendance_count(
+        in course_id Varchar(255),
+        in student_id Varchar(255),
+        in course_id Varchar(255)
 )
 BEGIN
-INSERT IGNORE INTO takes
-    VALUES
-        ('{s}', '{c}', '{date.strftime("%Y-%m-%d")}', {status});
+select count(*) as count from takes where student_id = student_id and course_id = course_id and present = True;
 END #
 delimiter ;
 
+--Employee applies for leave
 delimiter #
-CALL PROCEDURE insert_into_takes(
-    IN student_id VARCHAR(255),
-    IN Course_id Varchar(255),
-    IN date DATE,
-    IN Present boolean
+CREATE PROCEDURE employee_apply_for_leave(
+    in faculty_id Varchar(255),
+    in date Date
 )
 BEGIN
-INSERT IGNORE INTO takes
-    VALUES
-        ('{s}', '{c}', '{date.strftime("%Y-%m-%d")}', {status});
+INSERT IGNORE INTO Employee_records
+        VALUES 
+            (faculty_id, date, NULL, True);
 END #
 delimiter ;
 
-delimiter #
-CALL PROCEDURE insert_into_takes(
-    IN student_id VARCHAR(255),
-    IN Course_id Varchar(255),
-    IN date DATE,
-    IN Present boolean
-)
-BEGIN
-INSERT IGNORE INTO takes
-    VALUES
-        ('{s}', '{c}', '{date.strftime("%Y-%m-%d")}', {status});
-END #
-delimiter ;
+--Student appliues for leave
+INSERT INTO student_permission
+        VALUES
+            (student_id, date, True)
+
+--Selects the number of students present for a 
+--particular course on a given date. Sum function is used to
+--add up all the entries where present = 1 ie. true
+Select Course_id, sum(present) as count from takes where date = entered_date group by Course_id order by course_id;
+
+--Selects the number of students who were supposed 
+--to attend the course on the given date. 
+--The above two queries are used to find the percentage of students who attend the course
+select count(*) as count from takes where course_id = given_course_id and date = entered_date;
+
+--
+select course_id, count(*) as count from takes where student_id = entered_id AND date BETWEEN start_date AND end_date group by course_id order by course_id;
+--
+select count(*) from takes where course_id = entered_course and student_id = entered_id and date BETWEEN start_date AND end_date AND present = True;
+
+--Checks whether student has applied for leave permission on a particular date
+select permission from Student_permission where date = entered_date AND Student_id = entered_id;
+
+--Inserts into the permissions table a false value if the student is absent without permission.
+insert into student_permission values (student_id, date, False);
+
+--Selects the permission value from the employee records table for a given date to check 
+--if they had applied for leave before their absency
+select permission from employee_records where date = entered_date AND Emp_id = employee_id;
+
+--Updates employee information
+UPDATE employees
+    SET
+        first_name = entered_new_first_name,
+        last_name = entered_new_last_name,
+        DOB = new_DOB
+    WHERE
+        emp_id = employee_id;
+
+--Update student information
+UPDATE students
+    SET
+        first_name = entered_new_first_name,
+        last_name = entered_new_last_name,
+        DOB = new_DOB
+    WHERE
+        Student_id = entered_id;
+
+--Selects all students who have been absent 
+--without permission as well as their dates. 
+--This data is used to find the percentage of 
+--time a student is absent without permission.
+select * from student_permission where permission = 0;
 
