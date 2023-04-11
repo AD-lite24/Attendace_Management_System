@@ -23,20 +23,21 @@ def student_takes_generator(connection):
             courses_taken = ['c2']
             
         for c in courses_taken:
-            for i in range(15):
+            for i in range(1, 32):
                 year = 2023
                 month = 1
-                day = random.randint(1, 31)
+                day = i
                 date = datetime.date(year, month, day)
                 status = True
                 data.append((s, c, date.strftime("%Y-%m-%d"), status))
                 query = f"""
                 INSERT IGNORE INTO takes
                     VALUES
-                        (s, c, date.strftime("%Y-%m-%d"), {status});
+                        ('{s}', '{c}', '{date.strftime("%Y-%m-%d")}', {status});
                 """
                 mycursor.execute(query)
                 connection.commit()
+                
     
     mycursor.close()
                 
