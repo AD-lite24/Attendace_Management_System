@@ -28,7 +28,8 @@ def student_takes_generator(connection):
                 month = 1
                 day = i
                 date = datetime.date(year, month, day)
-                status = True
+                prob = 0.1
+                status = True if random.random() > prob else False
                 data.append((s, c, date.strftime("%Y-%m-%d"), status))
                 query = f"""
                 INSERT IGNORE INTO takes
