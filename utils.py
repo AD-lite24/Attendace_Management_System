@@ -1,5 +1,6 @@
 import mysql.connector
 from datetime import datetime 
+import matplotlib.pyplot as plt 
 
 def run_queries(connection, filename, delimiter):
 
@@ -151,27 +152,24 @@ def coursewise_attendance(connection, date):
     mycursor = connection.cursor()
     mycursor.execute(f"Select Course_id, sum(present) as count from takes where date = '{date}' group by Course_id order by count desc;")
     out = mycursor.fetchall()
+
     for i in out:
         print("Course_id: ", i[0], "; No of Students: ", i[1])
+
+    courses, number = [i[0] for i in out], [i[1] for i in out]
+
+    fig = plt.figure(figsize=(5, 5))
+    plt.bar(courses, number, color='green', width=0.5)
+    plt.xlabel("Courses")
+    plt.ylabel("Student Attendance")
+    plt.title(f"Coursewise attendance of students on a {date}")
+    plt.show()
 
     connection.commit()
     mycursor.close()
 
 def add_faculty(connection, emp_id, first_name, last_name, dob, dept_name, password, fav_colour):
     mycursor = connection.cursor()
-    # mycursor.execute(
-    #     f"""INSERT IGNORE INTO employees
-    #         VALUES
-    #             ('{emp_id}', '{first_name}', '{last_name}', '{dob}');
-    #     """
-    # )
-    # mycursor.execute(
-    #     f"""INSERT IGNORE INTO instructors
-    #         VALUES
-    #             ('{emp_id}', '{dept_name}', '{password}', '{fav_colour}');
-    #     """
-    # )
-    # mycursor.execute(f'CALL addInstructor('{}', )')
     mycursor.execute(f"""
     CALL addInstructor('{emp_id}', '{first_name}', '{last_name}', '{dob}', '{dept_name}', '{password}', '{fav_colour}');""")
     connection.commit()
