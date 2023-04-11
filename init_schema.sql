@@ -24,21 +24,21 @@ CREATE TABLE IF NOT EXISTS departments(
 
 
 CREATE TABLE IF NOT EXISTS employees(
-            Emp_id VARCHAR(255) NOT NULL,
-            First_name VARCHAR(255) NOT NULL,
-            Last_name VARCHAR(255) NOT NULL,
-            DOB DATE,
-            PRIMARY KEY (Emp_id)
-        );
+        Emp_id VARCHAR(255) NOT NULL,
+        First_name VARCHAR(255) NOT NULL,
+        Last_name VARCHAR(255) NOT NULL,
+        DOB DATE,
+        PRIMARY KEY (Emp_id)
+    );
 
 CREATE TABLE IF NOT EXISTS instructors(
-            Emp_id VARCHAR(255),
-            Dept_name VARCHAR(255),
-            Password VARCHAR(255),
-            Fav_colour VARCHAR(255),
-            PRIMARY KEY (Emp_id),
-            FOREIGN KEY (Dept_name) REFERENCES departments(Dept_name)
-        );
+        Emp_id VARCHAR(255),
+        Dept_name VARCHAR(255),
+        Password VARCHAR(255),
+        Fav_colour VARCHAR(255),
+        PRIMARY KEY (Emp_id),
+         FOREIGN KEY (Dept_name) REFERENCES departments(Dept_name)
+    );
 
 
 CREATE TABLE IF NOT EXISTS courses(
@@ -78,3 +78,21 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
 
+<<<<<<< HEAD
+=======
+CREATE TRIGGER tr_up_id_student
+BEFORE INSERT ON students
+FOR EACH ROW
+    SET NEW.student_id = LOWER(NEW.student_id);
+
+CREATE TRIGGER tr_up_id_faculty
+BEFORE INSERT ON instructors
+FOR EACH ROW
+    SET NEW.Emp_id = LOWER(NEW.Emp_id);
+
+CREATE TRIGGER tr_up_id_emp
+BEFORE INSERT ON employees
+FOR EACH ROW
+    SET NEW.Emp_id = LOWER(NEW.Emp_id);
+
+>>>>>>> baf7a5525edfde36114fbac7b0d088abc1ad7df2
