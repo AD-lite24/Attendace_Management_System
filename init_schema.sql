@@ -78,6 +78,8 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
 
+<<<<<<< HEAD
+=======
 CREATE TRIGGER tr_up_id_student
 BEFORE INSERT ON students
 FOR EACH ROW
@@ -93,3 +95,4 @@ BEFORE INSERT ON employees
 FOR EACH ROW
     SET NEW.Emp_id = LOWER(NEW.Emp_id);
 
+>>>>>>> baf7a5525edfde36114fbac7b0d088abc1ad7df2
