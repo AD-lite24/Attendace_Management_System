@@ -1,5 +1,6 @@
 import mysql.connector
 from datetime import datetime 
+
 def run_queries(connection, filename):
 
     mycursor = connection.cursor()
