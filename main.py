@@ -55,9 +55,12 @@ class MainWindow():
                 db_Info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_Info)
                 connection.commit()
+                utils.run_queries(connection, 'init_schema.sql', ';')
+                utils.run_queries(connection, 'initialisation.sql', ';')
+                # mycursor.execute("delimiter #")
+                utils.run_queries(connection, 'proc.sql', '#')
+                # mycursor.execute("delimiter ;")
                 mycursor.close()
-                utils.run_queries(connection, 'init_schema.sql')
-                utils.run_queries(connection, 'initialisation.sql')
                 return connection
 
         except Error as e:
