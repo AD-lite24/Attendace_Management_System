@@ -78,3 +78,11 @@ CREATE TABLE IF NOT EXISTS Employee_records(
         FOREIGN KEY(Emp_id) REFERENCES employees(Emp_id)
     );
 
+
+
+-- CREATE TRIGGER after_insert_student
+-- AFTER INSERT ON students
+-- FOR EACH ROW
+-- INSERT INTO TAKES
+-- VALUES
+--      (NEW.student_id, )
