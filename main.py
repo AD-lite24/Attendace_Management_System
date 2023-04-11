@@ -3,6 +3,7 @@ import utils
 import mysql.connector
 from mysql.connector import Error
 from interface import InterfaceWindow
+import generator
 
 class MainWindow():
     
@@ -57,9 +58,8 @@ class MainWindow():
                 connection.commit()
                 utils.run_queries(connection, 'init_schema.sql', ';')
                 utils.run_queries(connection, 'initialisation.sql', ';')
-                # mycursor.execute("delimiter #")
                 utils.run_queries(connection, 'proc.sql', '#')
-                # mycursor.execute("delimiter ;")
+                generator.student_takes_generator(connection)
                 mycursor.close()
                 return connection
 
