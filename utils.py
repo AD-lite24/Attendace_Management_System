@@ -112,10 +112,15 @@ def employee_attendance(connection, emp_ID, date, status):
 
 def check_student_attendance(connection, course_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' and present = True group by Student_id order by count;")
+    mycursor.execute(f"Select Student_id, count(*) as count from takes where Course_id = '{course_id}' group by Student_id order by student_id;")
     out = mycursor.fetchall()
     for i in out:
-        print("Student id: ", i[0], ";", "Attendance count: ", i[1])
+        mycursor.execute(f"select count(*) as count from takes where student_id = '{i[0]}' and course_id = '{course_id}' and present = True;")
+        out2 = mycursor.fetchall()
+        if(out2!=None):
+            out2 = out2[0]
+            print("Student id: ", i[0], ";", "Attendance count: ", out2[0], "; Percentage of Attendance: ", (100*out2[0])/i[1])
+        
     if not out:
         print("No Student is registered in this course or no student has attended any class of this course")
         
@@ -149,10 +154,17 @@ def student_apply_for_leave(connection, student_id, date):
     
 def coursewise_attendance(connection, date):
     mycursor = connection.cursor()
-    mycursor.execute(f"Select Course_id, sum(present) as count from takes where date = '{date}' group by Course_id order by count desc;")
+    mycursor.execute(f"Select Course_id, sum(present) as count from takes where date = '{date}' group by Course_id order by course_id;")
     out = mycursor.fetchall()
     for i in out:
-        print("Course_id: ", i[0], "; No of Students: ", i[1])
+        mycursor.execute(f"select count(*) as count from takes where course_id = '{i[0]}' and date = '{date}';")
+        out2 = mycursor.fetchall()
+        if(out2!=None):
+            out2 = out2[0]
+            print("Course id: ", i[0], ";", "Attendance count: ", i[1], "; Percentage of Attendance: ", (100*i[1])/out2[0])
+        
+    if not out:
+        print("Class has not been held for any course on this date or attendance has not been taken")
 
     connection.commit()
     mycursor.close()
@@ -190,10 +202,14 @@ def attendance_between_dates(connection, start_date, end_date, stu_id):
     
 def attendance_for_course(connection, course_id):
     mycursor = connection.cursor()
-    mycursor.execute(f"select date, count(*) as 'No of students present' from takes where course_id = '{course_id}' and present = True group by date order by date;")
+    mycursor.execute(f"select date, count(*) as 'No of students present' from takes where course_id = '{course_id}' group by date order by date;")
     out = mycursor.fetchall()
     for i in out:
-        print("Date: ", i[0], "; No of Students Present: ", i[1])
+        mycursor.execute(f"select count(*) from takes where date = '{i[0]}' and course_id = '{course_id}' and present = True;")
+        out2 = mycursor.fetchone()
+        if(out2!=None):
+            out2 = out2[0]
+            print("Date: ", i[0], "; No of Students Present: ", out2, "; Percentage of Attendance: ", (100*out2)/i[1])
     connection.commit()
     mycursor.close()
     
