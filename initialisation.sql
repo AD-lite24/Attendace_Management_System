@@ -63,12 +63,13 @@ INSERT IGNORE INTO courses
         ('c3', 2, 'e1', 'EEE'),
         ('c4', 3, 'e4', 'Bio'),
         ('c5', 2, 'e2', 'Chemical'),
+        ('c6', 4, 'e8', 'CSIS'),
         ('c7', 4, 'e5', 'Chemical'),
         ('c8', 3, 'e6', 'Eco'),
         ('c9', 2, 'e7', 'Mech'),
         ('c10', 2, 'e8', 'CSIS'),
         ('c11', 2, 'e9', 'Bio'),
-        ('c12', 2, 'e10', 'Chemical'),
+        ('c12', 2, 'e10', 'Chemical');
         
 
 
