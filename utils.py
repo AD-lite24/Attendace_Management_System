@@ -71,6 +71,13 @@ def student_attendance(connection, stu_ID, course_ID, date, status):
     mycursor.execute(f"INSERT INTO Takes values ('{stu_ID}', '{course_ID}', '{date}', {status});")
     connection.commit()
     mycursor.close()
+    if(status==False):
+        mycursor = connection.cursor()
+        mycursor.execute(f"call check_leave('{stu_ID}', '{date}');")
+        out = mycursor.fetchone()
+        out = out[0]
+        print("kk", out)
+    
 
 
 def employee_attendance(connection, emp_ID, date, status):
