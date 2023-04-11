@@ -97,58 +97,80 @@ class InterfaceWindow(Toplevel):
         Label(new_win, text='Login to faculty account', font='ar 15 bold',
               foreground='blue').grid(row=0, column=0)
 
+        Userval = StringVar()
+        Passval = StringVar()
+
         username = Label(new_win, text='Username', foreground='green')
         password = Label(new_win, text='Password', foreground='green')
 
         username.grid(row=1, column=0, pady=15)
         password.grid(row=2, column=0, pady=15)
 
-        user_entry = Entry(new_win, width=25)
-        pass_entry = Entry(new_win, width=25, show="*")
+        user_entry = Entry(new_win, width=25, textvariable=Userval)
+        pass_entry = Entry(new_win, width=25, show="*", textvariable=Passval)
 
         user_entry.grid(row=1, column=1, padx=5, pady=15)
         pass_entry.grid(row=2, column=1, padx=5, pady=15)
-
-        Button(new_win, text='Login', command=self.faculty_win).grid(
-            row=3, column=0, pady=15)
+        Button(new_win, text='Login', command=lambda:self.faculty_login_infra(
+            new_win, Userval.get(), Passval.get())).grid(row=3, column=0, pady=15)
         Button(new_win, text='Forgot Password', command=lambda:self.forgot_pass_win('instructors')).grid(
             row=3, column=1, pady=15)
 
     def admin_login_infra(self, new_win, username, password):
-        
-        self.admin_win()
-        new_win.destroy()
-        return
     
-        # mycursor = self.connection.cursor()
-        # mycursor.execute(
-        #     f"""SELECT * FROM admins
-        #         WHERE admin_id = '{username}';
-        #     """
-        # )
-        # self.connection.commit()
-        # out = mycursor.fetchone()
-
-        # if (out == None):
-        #     print('Admin User not found')
-        #     return
+        mycursor = self.connection.cursor(buffered = True)
+        mycursor.execute(
+            f"""SELECT * FROM admins
+                WHERE admin_id = '{username}';
+            """
+        )
+        self.connection.commit()
+        out = mycursor.fetchall()
         
-        # else:
-        #     stored_pwd = out[1]
+        if (out == None):
+            print('Admin User not found')
+            return
+        
+        else:
+            out = out[0]
+            stored_pwd = out[1]
 
-        #     if stored_pwd == password:
-        #         print(f'Welcome admin {username}')
-        #         new_win.destroy()
-        #         self.admin_win()
-        #         return
-        #     else:
-        #         print('Wrong Password!')
-        #         return
+            if stored_pwd == password:
+                print(f'Welcome admin {username}')
+                new_win.destroy()
+                self.admin_win()
+                return
+            else:
+                print('Wrong Password!')
+                return
 
     def faculty_login_infra(self, new_win, username, password):
-        self.faculty_win()
-        new_win.destroy()
-        return
+        print(username, password)
+        mycursor = self.connection.cursor(buffered = True)
+        mycursor.execute(
+            f"""SELECT * FROM instructors
+                WHERE emp_id = '{username}';
+            """
+        )
+        self.connection.commit()
+        out = mycursor.fetchall()
+
+        if (out == None):
+            print('Faculty User not found')
+            return
+        
+        else:
+            out = out[0]
+            stored_pwd = out[2]
+
+            if stored_pwd == password:
+                print(f'Welcome instructor {username}')
+                new_win.destroy()
+                self.admin_win()
+                return
+            else:
+                print('Wrong Password!')
+                return
 
     def forgot_pass_win(self, type):
 
