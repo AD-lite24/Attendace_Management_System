@@ -169,7 +169,7 @@ class InterfaceWindow(Toplevel):
             if stored_pwd == password:
                 print(f'Welcome instructor {username}')
                 new_win.destroy()
-                self.admin_win()
+                self.faculty_win()
                 return
             else:
                 print('Wrong Password!')
