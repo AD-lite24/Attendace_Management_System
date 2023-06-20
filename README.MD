@@ -5,4 +5,4 @@ The project was built using MySQL connector for Python for database management, 
 
 ### Contributors
 * Aditya Dandwate
-* Yashvardhan Battwara
+* Yashvardhan Batwara
